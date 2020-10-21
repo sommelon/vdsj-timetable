@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/scheduleLang.iml" filepath="$PROJECT_DIR$/scheduleLang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VDSJ-TimeTable.iml" filepath="$PROJECT_DIR$/VDSJ-TimeTable.iml" />
     </modules>
   </component>
 </project>
