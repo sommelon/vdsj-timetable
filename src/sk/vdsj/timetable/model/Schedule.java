@@ -4,13 +4,13 @@ public class Schedule {
     private String type;
     private Time time;
     private String groups;
-    private Person[] persons;
+    private String[] persons;
     private String note;
 
     public Schedule() {
     }
 
-    public Schedule(String type, Time time, String groups, Person[] persons, String note) {
+    public Schedule(String type, Time time, String groups, String[] persons, String note) {
         this.type = type;
         this.time = time;
         this.groups = groups;
@@ -44,11 +44,11 @@ public class Schedule {
         this.groups = groups;
     }
 
-    public Person[] getPersons() {
+    public String[] getPersons() {
         return persons;
     }
 
-    public void setPersons(Person[] persons) {
+    public void setPersons(String[] persons) {
         this.persons = persons;
     }
 
@@ -58,5 +58,15 @@ public class Schedule {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public void validate() {
+        if (type == null || time == null || persons == null) {
+            throw new TimetableLanguageException("Missing required parameters in a Schedule");
+        }
+
+        if (persons.length < 1) {
+            throw new TimetableLanguageException("Atleast one organiser is required for a Schedule");
+        }
     }
 }

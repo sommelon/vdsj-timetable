@@ -1,7 +1,7 @@
 package sk.vdsj.timetable.model;
 
 public class Timetable {
-    private String name;
+    private String programme;
     private String semester;
     private String grade;
     private Event[] events;
@@ -10,7 +10,7 @@ public class Timetable {
     }
 
     public Timetable(String name, String semester, String grade, Event[] events) {
-        this.name = name;
+        this.programme = name;
         this.semester = semester;
         this.grade = grade;
         this.events = events;
@@ -18,12 +18,12 @@ public class Timetable {
 
     // Getters and Setters
 
-    public String getName() {
-        return name;
+    public String getProgramme() {
+        return programme;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProgramme(String programme) {
+        this.programme = programme;
     }
 
     public String getSemester() {
@@ -48,5 +48,15 @@ public class Timetable {
 
     public void setEvents(Event[] events) {
         this.events = events;
+    }
+
+    public void validate() {
+        if (programme == null || semester == null || grade == null || events == null) {
+            throw new TimetableLanguageException("Missing required parameters in a Timetable");
+        }
+
+        if (events.length < 1) {
+            throw new TimetableLanguageException("Atleast one event is required in a Timetable");
+        }
     }
 }

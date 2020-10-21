@@ -29,4 +29,14 @@ public class Event {
     public void setSchedules(Schedule[] schedules) {
         this.schedules = schedules;
     }
+
+    public void validate() {
+        if (title == null) {
+            throw new TimetableLanguageException("Missing title in an Event");
+        }
+
+        if (schedules.length < 1) {
+            throw new TimetableLanguageException("Atleast one schedule is required in an Event");
+        }
+    }
 }

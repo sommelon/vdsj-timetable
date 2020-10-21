@@ -36,4 +36,14 @@ public class Time {
     public void setTime_to(LocalTime time_to) {
         this.time_to = time_to;
     }
+
+    public void validate() {
+        if (day == null || time_from == null || time_to == null) {
+            throw new TimetableLanguageException("Missing required parameters in a Time object");
+        }
+
+        if (time_from.isAfter(time_to)) {
+            throw new TimetableLanguageException("Starting time must be earlier than ending time");
+        }
+    }
 }
