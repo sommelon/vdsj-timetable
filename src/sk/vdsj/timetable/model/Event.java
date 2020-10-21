@@ -38,5 +38,9 @@ public class Event {
         if (schedules.length < 1) {
             throw new TimetableLanguageException("Atleast one schedule is required in an Event");
         }
+
+        for (var schedule: schedules) {
+            schedule.validate();
+        }
     }
 }

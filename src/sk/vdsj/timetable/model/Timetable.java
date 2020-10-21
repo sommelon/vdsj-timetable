@@ -58,5 +58,9 @@ public class Timetable {
         if (events.length < 1) {
             throw new TimetableLanguageException("Atleast one event is required in a Timetable");
         }
+
+        for (var event: events) {
+            event.validate();
+        }
     }
 }

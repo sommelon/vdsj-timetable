@@ -68,5 +68,7 @@ public class Schedule {
         if (persons.length < 1) {
             throw new TimetableLanguageException("Atleast one organiser is required for a Schedule");
         }
+
+        time.validate();
     }
 }
