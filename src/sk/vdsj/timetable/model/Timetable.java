@@ -1,6 +1,8 @@
 package sk.vdsj.timetable.model;
 
-public class Timetable {
+import java.io.Serializable;
+
+public class Timetable implements Serializable {
     private String programme;
     private String semester;
     private String grade;

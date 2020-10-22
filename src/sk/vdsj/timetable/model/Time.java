@@ -11,6 +11,12 @@ public class Time {
     public Time() {
     }
 
+    public Time(DayOfWeek day, LocalTime time_from, LocalTime time_to){
+        this.day = day;
+        this.time_from = time_from;
+        this.time_to = time_to;
+    }
+
     public DayOfWeek getDay() {
         return day;
     }
@@ -45,5 +51,10 @@ public class Time {
         if (time_from.isAfter(time_to)) {
             throw new TimetableLanguageException("Starting time must be earlier than ending time");
         }
+    }
+
+    @Override
+    public String toString() {
+        return day.toString() + " " + time_from.toString() + "-" + time_to.toString();
     }
 }
