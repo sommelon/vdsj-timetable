@@ -30,6 +30,7 @@ public class TimetablePrinter {
         }
         System.out.println();
         System.out.println("Termín: " + schedule.getTime());
+        System.out.println("Miestnosť: " + schedule.getRoom());
         System.out.println("Skupiny: " + schedule.getGroups());
         System.out.println("Poznámka: " + schedule.getNote());
         System.out.println();

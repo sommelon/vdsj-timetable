@@ -16,12 +16,7 @@ public class FunctionSequenceBuilder {
     private static List<Event> events = new ArrayList<>();
 
     private static List<Schedule> schedules;
-
     private static String scheduleType;
-//    private static String scheduleTime;
-//    private static String scheduleGroups;
-//    private static String scheduleNote;
-
     private static List<String> persons;
 
 
@@ -37,19 +32,17 @@ public class FunctionSequenceBuilder {
         schedules = new ArrayList<>();
     }
 
-    public static void schedule(String type, String time, String groups, String note){
-        DayOfWeek day = Days.valueOf(time.substring(0,time.indexOf(' '))).getKey();
+    public static void schedule(String type, String time, String room, String groups, String note){
+        DayOfWeek day = DayOfWeek.valueOf(Days.valueOf(time.substring(0,time.indexOf(' '))).getKey());
         LocalTime startTime = LocalTime.parse(time.substring(time.indexOf(' ') + 1, time.indexOf('-')));
         LocalTime endTIme = LocalTime.parse(time.substring(time.indexOf('-') + 1));
-
         Time formattedTime = new Time(day, startTime, endTIme);
 
         if(scheduleType != null)
-            schedules.add(new Schedule(type,  formattedTime, groups, persons.toArray(new String[]{}), note));
+            schedules.add(new Schedule(type,  formattedTime, room, groups, persons.toArray(new String[]{}), note));
         scheduleType = type;
 
         persons = new ArrayList<>();
-
     }
 
     public static void person(String name){
@@ -64,6 +57,5 @@ public class FunctionSequenceBuilder {
     private static void createEvent() {
         events.add(new Event(eventTitle, schedules.toArray(new Schedule[]{})));
     }
-
 
 }

@@ -1,17 +1,16 @@
 package sk.vdsj.timetable.model;
 
-import java.time.DayOfWeek;
-
 public enum Days {
-    PON(DayOfWeek.MONDAY), UT(DayOfWeek.TUESDAY), ST(DayOfWeek.WEDNESDAY), STV(DayOfWeek.THURSDAY), PIA(DayOfWeek.FRIDAY);
+    PON("MONDAY"), UT("TUESDAY"), ST("WEDNESDAY"), STV("THURSDAY"), PIA("FRIDAY"),
+    MONDAY("PON"), TUESDAY("UT"), WEDNESDAY("ST"), THURSDAY("STV"), FRIDAY("PIA");
 
-    private final DayOfWeek key;
+    private final String key;
 
-    Days(DayOfWeek key) {
+    Days(String key) {
         this.key = key;
     }
 
-    public DayOfWeek getKey() {
+    public String getKey() {
         return key;
     }
 

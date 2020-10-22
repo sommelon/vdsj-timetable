@@ -55,6 +55,6 @@ public class Time {
 
     @Override
     public String toString() {
-        return day.toString() + " " + time_from.toString() + "-" + time_to.toString();
+        return Days.valueOf(day.toString()).getKey() + " " + time_from.toString() + "-" + time_to.toString();
     }
 }
