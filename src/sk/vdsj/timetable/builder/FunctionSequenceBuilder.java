@@ -1,9 +1,10 @@
 package sk.vdsj.timetable.builder;
 
-import sk.vdsj.timetable.model.*;
+import sk.vdsj.timetable.model.Event;
+import sk.vdsj.timetable.model.Schedule;
+import sk.vdsj.timetable.model.Time;
+import sk.vdsj.timetable.model.Timetable;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +34,8 @@ public class FunctionSequenceBuilder {
     }
 
     public static void event(String type, String time, String room, String groups, String note){
-        DayOfWeek day = DayOfWeek.valueOf(Days.valueOf(time.substring(0,time.indexOf(' '))).getKey());
-        LocalTime startTime = LocalTime.parse(time.substring(time.indexOf(' ') + 1, time.indexOf('-')));
-        LocalTime endTIme = LocalTime.parse(time.substring(time.indexOf('-') + 1));
-        Time formattedTime = new Time(day, startTime, endTIme);
-
         if(eventType != null)
-            events.add(new Event(type, formattedTime, room, groups, persons.toArray(new String[]{}), note));
+            events.add(new Event(type, Time.valueOf(time), room, groups, persons.toArray(new String[]{}), note));
         eventType = type;
 
         persons = new ArrayList<>();
