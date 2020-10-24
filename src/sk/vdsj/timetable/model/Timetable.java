@@ -6,16 +6,13 @@ public class Timetable implements Serializable {
     private String programme;
     private String semester;
     private String grade;
-    private Event[] events;
+    private Schedule[] schedules;
 
-    public Timetable() {
-    }
-
-    public Timetable(String name, String semester, String grade, Event[] events) {
+    public Timetable(String name, String semester, String grade, Schedule[] schedules) {
         this.programme = name;
         this.semester = semester;
         this.grade = grade;
-        this.events = events;
+        this.schedules = schedules;
     }
 
     // Getters and Setters
@@ -44,24 +41,24 @@ public class Timetable implements Serializable {
         this.grade = grade;
     }
 
-    public Event[] getEvents() {
-        return events;
+    public Schedule[] getSchedules() {
+        return schedules;
     }
 
-    public void setEvents(Event[] events) {
-        this.events = events;
+    public void setSchedules(Schedule[] schedules) {
+        this.schedules = schedules;
     }
 
     public void validate() {
-        if (programme == null || semester == null || grade == null || events == null) {
+        if (programme == null || semester == null || grade == null || schedules == null) {
             throw new TimetableLanguageException("Missing required parameters in a Timetable");
         }
 
-        if (events.length < 1) {
+        if (schedules.length < 1) {
             throw new TimetableLanguageException("Atleast one event is required in a Timetable");
         }
 
-        for (var event: events) {
+        for (var event: schedules) {
             event.validate();
         }
     }

@@ -8,9 +8,6 @@ public class Time {
     private LocalTime time_from;
     private LocalTime time_to;
 
-    public Time() {
-    }
-
     public Time(DayOfWeek day, LocalTime time_from, LocalTime time_to){
         this.day = day;
         this.time_from = time_from;

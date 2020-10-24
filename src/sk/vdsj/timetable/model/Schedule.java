@@ -1,84 +1,43 @@
 package sk.vdsj.timetable.model;
 
 public class Schedule {
-    private String type;
-    private Time time;
-    private String room;
-    private String groups;
-    private String[] persons;
-    private String note;
+    private String title;
+    private Event[] events;
 
-    public Schedule() {
-    }
-
-    public Schedule(String type, Time time, String room, String groups, String[] persons, String note) {
-        this.type = type;
-        this.time = time;
-        this.room = room;
-        this.groups = groups;
-        this.persons = persons;
-        this.note = note;
+    public Schedule(String title, Event[] events) {
+        this.title = title;
+        this.events = events;
     }
 
     // Getters and Setters
-
-    public String getType() {
-        return type;
+    
+    public String getTitle() {
+        return title;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Time getTime() {
-        return time;
+    public Event[] getEvents() {
+        return events;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
-    public String getRoom() {
-        return room;
-    }
-
-    public void setRoom(String room) {
-        this.room = room;
-    }
-
-    public String getGroups() {
-        return groups;
-    }
-
-    public void setGroups(String groups) {
-        this.groups = groups;
-    }
-
-    public String[] getPersons() {
-        return persons;
-    }
-
-    public void setPersons(String[] persons) {
-        this.persons = persons;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
+    public void setEvents(Event[] events) {
+        this.events = events;
     }
 
     public void validate() {
-        if (type == null || time == null || room == null || persons == null) {
-            throw new TimetableLanguageException("Missing required parameters in a Schedule");
+        if (title == null) {
+            throw new TimetableLanguageException("Missing title in a Schedule");
         }
 
-        if (persons.length < 1) {
-            throw new TimetableLanguageException("Atleast one organiser is required for a Schedule");
+        if (events.length < 1) {
+            throw new TimetableLanguageException("Atleast one schedule is required in a Schedule");
         }
 
-        time.validate();
+        for (var schedule: events) {
+            schedule.validate();
+        }
     }
 }

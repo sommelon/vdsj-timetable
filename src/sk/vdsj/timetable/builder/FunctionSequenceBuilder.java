@@ -12,11 +12,11 @@ public class FunctionSequenceBuilder {
     private static String timetableSemester;
     private static String timetableGrade;
 
-    private static String eventTitle;
-    private static List<Event> events = new ArrayList<>();
+    private static String scheduleTitle;
+    private static List<Schedule> schedules = new ArrayList<>();
 
-    private static List<Schedule> schedules;
-    private static String scheduleType;
+    private static List<Event> events;
+    private static String eventType;
     private static List<String> persons;
 
 
@@ -26,21 +26,21 @@ public class FunctionSequenceBuilder {
         timetableGrade = grade;
     }
 
-    public static void event(String title){
-        if(eventTitle != null) createEvent();
-        eventTitle = title;
-        schedules = new ArrayList<>();
+    public static void schedule(String title){
+        if(scheduleTitle != null) createSchedule();
+        scheduleTitle = title;
+        events = new ArrayList<>();
     }
 
-    public static void schedule(String type, String time, String room, String groups, String note){
+    public static void event(String type, String time, String room, String groups, String note){
         DayOfWeek day = DayOfWeek.valueOf(Days.valueOf(time.substring(0,time.indexOf(' '))).getKey());
         LocalTime startTime = LocalTime.parse(time.substring(time.indexOf(' ') + 1, time.indexOf('-')));
         LocalTime endTIme = LocalTime.parse(time.substring(time.indexOf('-') + 1));
         Time formattedTime = new Time(day, startTime, endTIme);
 
-        if(scheduleType != null)
-            schedules.add(new Schedule(type,  formattedTime, room, groups, persons.toArray(new String[]{}), note));
-        scheduleType = type;
+        if(eventType != null)
+            events.add(new Event(type, formattedTime, room, groups, persons.toArray(new String[]{}), note));
+        eventType = type;
 
         persons = new ArrayList<>();
     }
@@ -50,12 +50,12 @@ public class FunctionSequenceBuilder {
     }
 
     public static Timetable getTimeTable() {
-        createEvent();
-        return new Timetable(timetableProgramme, timetableSemester, timetableGrade, events.toArray(new Event[] {}));
+        createSchedule();
+        return new Timetable(timetableProgramme, timetableSemester, timetableGrade, schedules.toArray(new Schedule[] {}));
     }
 
-    private static void createEvent() {
-        events.add(new Event(eventTitle, schedules.toArray(new Schedule[]{})));
+    private static void createSchedule() {
+        schedules.add(new Schedule(scheduleTitle, events.toArray(new Event[]{})));
     }
 
 }

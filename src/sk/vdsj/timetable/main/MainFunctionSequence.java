@@ -11,18 +11,18 @@ public class MainFunctionSequence {
         /***************************************************************/
         timetable("Informatika", "LS 2020/2021", "BC1");
 
-        event("Vývoj doménovo-špecifických jazykov");
-            schedule("CL", "ST 10:50-12:20", "ZP1", "1, 2", "Prezenčne");
+        schedule("Vývoj doménovo-špecifických jazykov");
+            event("CL", "ST 10:50-12:20", "ZP1", "1, 2", "Prezenčne");
                 person("Ivan Gašparovič");
                 person("Andrej Danko");
-            schedule("P", "ST 13:30-15:00", "ZP1", "1, 2", "Hibridne");
+            event("P", "ST 13:30-15:00", "ZP1", "1, 2", "Hybridne");
                 person("Janko Hraško");
                 person("Jožko Mrkvička");
-        event("Paralelné programovanie");
-            schedule("CL", "STV 10:50-12:20","ZP1", "1, 2", "Prezenčne");
+        schedule("Paralelné programovanie");
+            event("CL", "STV 10:50-12:20","ZP1", "1, 2", "Prezenčne");
                 person("Ivan Gašparovič");
                 person("Andrej Danko");
-            schedule("P", "STV 13:30-15:00", "ZP1","1, 2", "Hibridne");
+            event("P", "STV 13:30-15:00", "ZP1","1, 2", "Hybridne");
                 person("Janko Hraško");
                 person("Jožko Mrkvička");
 

@@ -9,30 +9,30 @@ public class TimetablePrinter {
     public void print(Timetable timetable) {
         System.out.println("Študijný program: " + timetable.getProgramme());
 
-        for(Event event : timetable.getEvents())
-            print(event);
-    }
-
-    private void print(Event event) {
-        System.out.println("Predmet: " + event.getTitle());
-
-        for(Schedule schedule : event.getSchedules())
+        for(Schedule schedule : timetable.getSchedules())
             print(schedule);
-
     }
 
     private void print(Schedule schedule) {
-        System.out.println("Typ hodiny: " + schedule.getType());
+        System.out.println("Predmet: " + schedule.getTitle());
+
+        for(Event event : schedule.getEvents())
+            print(event);
+
+    }
+
+    private void print(Event event) {
+        System.out.println("Typ hodiny: " + event.getType());
         System.out.print("Vyučujúci: ");
-        for(int i = 0; i < schedule.getPersons().length; i++) {
+        for(int i = 0; i < event.getPersons().length; i++) {
             if(i != 0) System.out.print(", ");
-            System.out.print(schedule.getPersons()[i]);
+            System.out.print(event.getPersons()[i]);
         }
         System.out.println();
-        System.out.println("Termín: " + schedule.getTime());
-        System.out.println("Miestnosť: " + schedule.getRoom());
-        System.out.println("Skupiny: " + schedule.getGroups());
-        System.out.println("Poznámka: " + schedule.getNote());
+        System.out.println("Termín: " + event.getTime());
+        System.out.println("Miestnosť: " + event.getRoom());
+        System.out.println("Skupiny: " + event.getGroups());
+        System.out.println("Poznámka: " + event.getNote());
         System.out.println();
     }
 
