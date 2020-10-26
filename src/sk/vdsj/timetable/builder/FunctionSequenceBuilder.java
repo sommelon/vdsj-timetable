@@ -17,8 +17,12 @@ public class FunctionSequenceBuilder {
 
     private static List<Event> events;
     private static String eventType;
-    private static List<String> persons;
+    private static Time formattedTime;
+    private static String eventRoom;
+    private static String eventGroups;
+    private static String eventNote;
 
+    private static List<String> persons;
 
     public static void timetable(String programme, String semester, String grade){
         timetableProgramme = programme;
@@ -36,11 +40,13 @@ public class FunctionSequenceBuilder {
         DayOfWeek day = DayOfWeek.valueOf(Days.valueOf(time.substring(0,time.indexOf(' '))).getKey());
         LocalTime startTime = LocalTime.parse(time.substring(time.indexOf(' ') + 1, time.indexOf('-')));
         LocalTime endTIme = LocalTime.parse(time.substring(time.indexOf('-') + 1));
-        Time formattedTime = new Time(day, startTime, endTIme);
 
-        if(eventType != null)
-            events.add(new Event(type, formattedTime, room, groups, persons.toArray(new String[]{}), note));
+        if(eventType != null) createEvent();
         eventType = type;
+        formattedTime = new Time(day, startTime, endTIme);
+        eventRoom = room;
+        eventGroups = groups;
+        eventNote = note;
 
         persons = new ArrayList<>();
     }
@@ -50,12 +56,18 @@ public class FunctionSequenceBuilder {
     }
 
     public static Timetable getTimeTable() {
+        createEvent();
         createSchedule();
+
         return new Timetable(timetableProgramme, timetableSemester, timetableGrade, schedules.toArray(new Schedule[] {}));
     }
 
     private static void createSchedule() {
         schedules.add(new Schedule(scheduleTitle, events.toArray(new Event[]{})));
+    }
+
+    private static void createEvent() {
+        events.add(new Event(eventType, formattedTime, eventRoom, eventGroups, persons.toArray(new String[]{}), eventNote));
     }
 
 }
