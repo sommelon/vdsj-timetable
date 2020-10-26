@@ -18,7 +18,6 @@ public class Event {
     }
 
     // Getters and Setters
-
     public String getType() {
         return type;
     }
