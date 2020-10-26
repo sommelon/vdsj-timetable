@@ -3,6 +3,7 @@ package sk.vdsj.timetable.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Timetable implements Serializable {
     private String programme;
@@ -32,6 +33,9 @@ public class Timetable implements Serializable {
                 }
             }
         }
+
+        // sort by time_from
+        events.sort(Comparator.comparing((Event event) -> event.getTime().getTime_from()));
 
         return events;
     }

@@ -34,7 +34,20 @@
                         <td>
                             <div class="row">
                             #foreach($event in $timetable.getEventsByDay($day))
-                                <div class="card m-1 p-2 text-center"> $event.renderEvent($timetable.getScheduleByEvent($event).getTitle())</div>
+                                <div class="card m-1 p-2 text-left">
+                                    <small>
+                                        <h6>$event.type: $timetable.getScheduleByEvent($event).getTitle()</h6>
+                                        <strong style="font-size: 15px;">$event.time.getTime_from() - $event.time.getTime_to()</strong><br/>
+                                        $event.room - ($event.getGroups())<br/>
+                                        #foreach($person in $event.getPersons())
+                                            #if($velocityCount  != 1); #end
+                                            <strong>$person</strong>
+                                        #end
+                                        <br/>
+
+                                    </small>
+                                    <h6 class="m-0">$event.note</h6>
+                                </div>
                             #end
                             </div>
                         </td>
