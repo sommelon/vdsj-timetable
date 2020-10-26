@@ -40,6 +40,14 @@ public class Time {
         this.time_to = time_to;
     }
 
+    public static Time valueOf(String time) {
+        DayOfWeek day = DayOfWeek.valueOf(Days.valueOf(time.substring(0,time.indexOf(' '))).getKey());
+        LocalTime startTime = LocalTime.parse(time.substring(time.indexOf(' ') + 1, time.indexOf('-')));
+        LocalTime endTIme = LocalTime.parse(time.substring(time.indexOf('-') + 1));
+
+        return new Time(day, startTime, endTIme);
+    }
+
     public void validate() {
         if (day == null || time_from == null || time_to == null) {
             throw new TimetableLanguageException("Missing required parameters in a Time object");

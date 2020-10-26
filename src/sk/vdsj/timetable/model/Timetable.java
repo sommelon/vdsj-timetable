@@ -8,8 +8,8 @@ public class Timetable implements Serializable {
     private String grade;
     private Schedule[] schedules;
 
-    public Timetable(String name, String semester, String grade, Schedule[] schedules) {
-        this.programme = name;
+    public Timetable(String programme, String semester, String grade, Schedule[] schedules) {
+        this.programme = programme;
         this.semester = semester;
         this.grade = grade;
         this.schedules = schedules;
