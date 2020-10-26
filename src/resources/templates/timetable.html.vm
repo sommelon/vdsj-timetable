@@ -12,44 +12,53 @@
             <table class="table table-bordered mt-4">
                 <thead>
                     <tr class="text-center">
-                        <th>Den</th>
+                        <th class="text-left">Predmet</th>
+
+                        <th>Pondelok</th>
+                        <th>Utorok</th>
+                        <th>Streda</th>
+                        <th>Stvrtok</th>
+                        <th>Piatok</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="text-center">Pondelok</td>
-                    #foreach($event in $timetable.getEventsByDay("MONDAY"))
-                        <td class="text-center">$event.renderEvent("Test")</td>
-                    #end
-                <tr>
+                    #foreach($schedule in $timetable.schedules)
+                    <tr>
+                        <td>$schedule.title</td>
+                        #foreach($event in $schedule.events)
+                            #if($event.getTime().getDay().toString() == "MONDAY")
+                                <td>$event.renderEvent("")</td>
+                            #else
+                                <td></td>
+                            #end
 
-                <tr>
-                    <td class="text-center">Utorok</td>
-                    #foreach($event in $timetable.getEventsByDay("TUESDAY"))
-                        <td class="text-center">$event.renderEvent("Chyba tu nazov predmetu!")</td>
-                    #end
-                <tr>
+                            #if($event.getTime().getDay().toString() == "THUSDAY")
+                                <td>$event.renderEvent("")</td>
+                            #else
+                                <td></td>
+                            #end
 
-                <tr>
-                    <td class="text-center">Streda</td>
-                    #foreach($event in $timetable.getEventsByDay("WEDNESDAY"))
-                        <td class="text-center">$event.renderEvent("Chyba tu nazov predmetu!")</td>
-                    #end
-                <tr>
+                            #if($event.getTime().getDay().toString() == "WEDNESDAY")
+                                <td>$event.renderEvent("")</td>
+                            #else
+                                <td></td>
+                            #end
 
-                <tr>
-                    <td class="text-center">Stvrtok</td>
-                    #foreach($event in $timetable.getEventsByDay("THURSDAY"))
-                        <td class="text-center">$event.renderEvent("Chyba tu nazov predmetu!")</td>
-                    #end
-                <tr>
+                            #if($event.getTime().getDay().toString() == "THURSDAY")
+                                <td>$event.renderEvent("")</td>
+                            #else
+                                <td></td>
+                            #end
 
-                <tr>
-                    <td class="text-center">Piatok</td>
-                    #foreach($event in $timetable.getEventsByDay("FRIDAY"))
-                        <td class="text-center">$event.renderEvent("Chyba tu nazov predmetu!")</td>
+                            #if($event.getTime().getDay().toString() == "FRIDAY")
+                                <td>$event.renderEvent("")</td>
+                            #else
+                                <td></td>
+                            #end
+
+                        #end
+                    </tr>
                     #end
-                <tr>
                 </tbody>
             </table>
         </div>
