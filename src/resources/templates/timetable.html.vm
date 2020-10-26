@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Timetable v1.0.0</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h2 class="text-center mt-4">$timetable.getFullTitle()</h2>
+            <table class="table table-bordered mt-4">
+                <thead>
+                    <tr class="text-center">
+                        <th>Den</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="text-center">Pondelok</td>
+                    #foreach($event in $timetable.getEventsByDay("MONDAY"))
+                        <td class="text-center">$event.renderEvent("Test")</td>
+                    #end
+                <tr>
+
+                <tr>
+                    <td class="text-center">Utorok</td>
+                    #foreach($event in $timetable.getEventsByDay("TUESDAY"))
+                        <td class="text-center">$event.renderEvent("Chyba tu nazov predmetu!")</td>
+                    #end
+                <tr>
+
+                <tr>
+                    <td class="text-center">Streda</td>
+                    #foreach($event in $timetable.getEventsByDay("WEDNESDAY"))
+                        <td class="text-center">$event.renderEvent("Chyba tu nazov predmetu!")</td>
+                    #end
+                <tr>
+
+                <tr>
+                    <td class="text-center">Stvrtok</td>
+                    #foreach($event in $timetable.getEventsByDay("THURSDAY"))
+                        <td class="text-center">$event.renderEvent("Chyba tu nazov predmetu!")</td>
+                    #end
+                <tr>
+
+                <tr>
+                    <td class="text-center">Piatok</td>
+                    #foreach($event in $timetable.getEventsByDay("FRIDAY"))
+                        <td class="text-center">$event.renderEvent("Chyba tu nazov predmetu!")</td>
+                    #end
+                <tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
