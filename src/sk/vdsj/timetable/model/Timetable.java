@@ -2,7 +2,6 @@ package sk.vdsj.timetable.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Timetable implements Serializable {
     private String programme;
@@ -22,18 +21,34 @@ public class Timetable implements Serializable {
         return programme + " - " + semester + " - " + grade;
     }
 
-    public HashMap<String, Event> getEventsByDay(String day){
-        HashMap<String, Event> events = new HashMap<String, Event>();
+    public ArrayList<Event> getEventsByDay(String day){
+        ArrayList<Event> events = new ArrayList<>();
 
         for(Schedule schedule : schedules){
             for(Event event : schedule.getEvents()){
                 if( event.getTime().getDay().toString().equals(day) ){
-                    events.put(schedule.getTitle(), event);
+                    events.add(event);
                 }
             }
         }
 
         return events;
+    }
+
+    public int countEventsByDay(String day){
+        return (int)this.getEventsByDay(day).size()/12;
+    }
+
+    public ArrayList<String> getDays(){
+
+        ArrayList<String> days = new ArrayList<>();
+        days.add("MONDAY");
+        days.add("TUESDAY");
+        days.add("WEDNESDAY");
+        days.add("THURSDAY");
+        days.add("FRIDAY");
+
+        return days;
     }
 
     // Getters and Setters

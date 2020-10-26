@@ -19,11 +19,13 @@ public class Event {
 
     // Helper Methods:
     public String renderEvent(String subject){
+
+
         String html = "<small>";
 
         html += "<strong style='font-size: 15px;'>"+time.getTime_from()+" - "+time.getTime_to()+"</strong><br/>";
         html += subject+"<br/>";
-        html += room+"<br/>";
+        html += room+" - "+this.getGroups()+"<br/>";
 
         for (int i = 0; i < this.getPersons().length; i++) {
             if (i != 0) html +="; ";

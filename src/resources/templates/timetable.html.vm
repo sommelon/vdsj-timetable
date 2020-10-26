@@ -9,56 +9,27 @@
     <body>
         <div class="container">
             <h2 class="text-center mt-4">$timetable.getFullTitle()</h2>
-            <table class="table table-bordered mt-4">
-                <thead>
-                    <tr class="text-center">
-                        <th class="text-left">Predmet</th>
-
-                        <th>Pondelok</th>
-                        <th>Utorok</th>
-                        <th>Streda</th>
-                        <th>Stvrtok</th>
-                        <th>Piatok</th>
-                    </tr>
-                </thead>
+            <table class="table mt-4">
                 <tbody>
-                    #foreach($schedule in $timetable.schedules)
+                <tr style="background: darkgrey;">
+                    <th style="max-width: 100px;">Day</th>
+                    <th colspan="2">Events</th>
+                </tr>
+
+                #foreach($day in $timetable.getDays())
                     <tr>
-                        <td>$schedule.title</td>
-                        #foreach($event in $schedule.events)
-                            #if($event.getTime().getDay().toString() == "MONDAY")
-                                <td>$event.renderEvent("")</td>
-                            #else
-                                <td></td>
+                        <td style="max-width: 100px; vertical-align: middle;"><strong>$day</strong></td>
+                        <td>
+                            <div class="row">
+                            #foreach($event in $timetable.getEventsByDay($day))
+                                <div class="text-center">
+                                    <div class="card m-1 p-2"> $event.renderEvent("SUBJECT NAME")</div>
+                                </div>
                             #end
-
-                            #if($event.getTime().getDay().toString() == "THUSDAY")
-                                <td>$event.renderEvent("")</td>
-                            #else
-                                <td></td>
-                            #end
-
-                            #if($event.getTime().getDay().toString() == "WEDNESDAY")
-                                <td>$event.renderEvent("")</td>
-                            #else
-                                <td></td>
-                            #end
-
-                            #if($event.getTime().getDay().toString() == "THURSDAY")
-                                <td>$event.renderEvent("")</td>
-                            #else
-                                <td></td>
-                            #end
-
-                            #if($event.getTime().getDay().toString() == "FRIDAY")
-                                <td>$event.renderEvent("")</td>
-                            #else
-                                <td></td>
-                            #end
-
-                        #end
+                            </div>
+                        </td>
                     </tr>
-                    #end
+                #end
                 </tbody>
             </table>
         </div>
