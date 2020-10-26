@@ -2,6 +2,7 @@ package sk.vdsj.timetable.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Timetable implements Serializable {
     private String programme;
@@ -35,8 +36,15 @@ public class Timetable implements Serializable {
         return events;
     }
 
-    public int countEventsByDay(String day){
-        return (int)this.getEventsByDay(day).size()/12;
+    public Schedule getScheduleByEvent(Event event){
+        Schedule schedule_that_i_wanted = null;
+        for (Schedule schedule : schedules) {
+            if(Arrays.asList(schedule.getEvents()).contains(event)){
+                schedule_that_i_wanted = schedule;
+            }
+        }
+
+        return schedule_that_i_wanted;
     }
 
     public ArrayList<String> getDays(){

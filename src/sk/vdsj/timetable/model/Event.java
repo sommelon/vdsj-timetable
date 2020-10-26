@@ -20,19 +20,21 @@ public class Event {
     // Helper Methods:
     public String renderEvent(String subject){
 
+        String html = "";
 
-        String html = "<small>";
+        html += "<small>";
+            html += "<strong style='font-size: 15px;'>"+time.getTime_from()+" - "+time.getTime_to()+"</strong><br/>";
+            html += subject+"<br/>";
+            html += type+": "+room+" - "+this.getGroups()+"<br/>";
 
-        html += "<strong style='font-size: 15px;'>"+time.getTime_from()+" - "+time.getTime_to()+"</strong><br/>";
-        html += subject+"<br/>";
-        html += room+" - "+this.getGroups()+"<br/>";
-
-        for (int i = 0; i < this.getPersons().length; i++) {
-            if (i != 0) html +="; ";
-            html += "<strong>"+this.getPersons()[i]+"</strong>";
-        }
-        html += "<br/>";
+            for (int i = 0; i < this.getPersons().length; i++) {
+                if (i != 0) html +="; ";
+                html += "<strong>"+this.getPersons()[i]+"</strong>";
+            }
+            html += "<br/>";
         html += "</small>";
+
+        html += "<h5 class='m-0'>"+note+"</h5>";
 
         return html;
     }
