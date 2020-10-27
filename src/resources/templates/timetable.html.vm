@@ -37,11 +37,11 @@
                                 <div class="card m-1 p-2 text-left">
                                     <small>
                                         <h6>$event.type: $timetable.getScheduleByEvent($event).getTitle()</h6>
-                                        <strong style="font-size: 15px;">$event.time.getTime_from() - $event.time.getTime_to()</strong><br/>
-                                        $event.room - ($event.getGroups())<br/>
-                                        #foreach($person in $event.getPersons())
+                                        <strong style="font-size: 15px;">$event.time.getStartTime() - $event.time.getEndTime()</strong><br/>
+                                        $event.location - ($event.getGroups())<br/>
+                                        #foreach($organiser in $event.getOrganisers())
                                             #if($velocityCount  != 1); #end
-                                            <strong>$person</strong>
+                                            <strong>$organiser</strong>
                                         #end
                                         <br/>
 

@@ -3,17 +3,17 @@ package sk.vdsj.timetable.model;
 public class Event {
     private String type;
     private Time time;
-    private String room;
+    private String location;
     private String groups;
-    private String[] persons;
+    private String[] organisers;
     private String note;
 
-    public Event(String type, Time time, String room, String groups, String[] persons, String note) {
+    public Event(String type, Time time, String location, String groups, String[] organisers, String note) {
         this.type = type;
         this.time = time;
-        this.room = room;
+        this.location = location;
         this.groups = groups;
-        this.persons = persons;
+        this.organisers = organisers;
         this.note = note;
     }
 
@@ -34,12 +34,12 @@ public class Event {
         this.time = time;
     }
 
-    public String getRoom() {
-        return room;
+    public String getLocation() {
+        return location;
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getGroups() {
@@ -50,12 +50,12 @@ public class Event {
         this.groups = groups;
     }
 
-    public String[] getPersons() {
-        return persons;
+    public String[] getOrganisers() {
+        return organisers;
     }
 
-    public void setPersons(String[] persons) {
-        this.persons = persons;
+    public void setOrganisers(String[] organisers) {
+        this.organisers = organisers;
     }
 
     public String getNote() {
@@ -67,12 +67,14 @@ public class Event {
     }
 
     public void validate() {
-        if (type == null || time == null || room == null || persons == null) {
-            throw new TimetableLanguageException("Missing required parameters in an Event");
-        }
-
-        if (persons.length < 1) {
-            throw new TimetableLanguageException("Atleast one organiser is required for an Event");
+        if (time == null) {
+            throw new TimetableLanguageException("Time of event isn't specified.");
+        } else if (type == null || type.isEmpty()) {
+            throw new TimetableLanguageException("Type of event at " + time + " isn't specified.");
+        } else if (location == null || location.isEmpty()) {
+            throw new TimetableLanguageException("Location of event at " + time + " isn't specified.");
+        } else if (organisers == null || organisers.length < 1) {
+            throw new TimetableLanguageException("At least one organiser is required for an event at " + time);
         }
 
         time.validate();

@@ -1,7 +1,7 @@
 package sk.vdsj.timetable.builder;
 
 import sk.vdsj.timetable.builder.types.AfterEvent;
-import sk.vdsj.timetable.builder.types.AfterPerson;
+import sk.vdsj.timetable.builder.types.AfterOrganiser;
 import sk.vdsj.timetable.builder.types.AfterSchedule;
 import sk.vdsj.timetable.builder.types.AfterTimetable;
 import sk.vdsj.timetable.model.Event;
@@ -11,14 +11,14 @@ import sk.vdsj.timetable.model.Timetable;
 
 import java.util.ArrayList;
 
-public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, AfterEvent, AfterPerson {
+public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, AfterEvent, AfterOrganiser {
     private static Timetable timetable;
     private static Schedule scheduleContext;
     private static Event eventContext;
 
     private static ArrayList<Schedule> schedules = new ArrayList<>();
     private static ArrayList<Event> events;
-    private static ArrayList<String> persons;
+    private static ArrayList<String> organisers;
 
     public static AfterTimetable timetable(String programme, String semester, String grade) {
         timetable = new Timetable(programme, semester, grade, null);
@@ -36,17 +36,17 @@ public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, Aft
     }
 
     @Override
-    public AfterEvent event(String type, String time, String room, String groups, String note) {
+    public AfterEvent event(String type, String time, String location, String groups, String note) {
         addPreviousEvent();
-        eventContext = new Event(type, Time.valueOf(time), room, groups, null, note);
-        persons = new ArrayList<>();
+        eventContext = new Event(type, Time.valueOf(time), location, groups, null, note);
+        organisers = new ArrayList<>();
 
         return this;
     }
 
     @Override
-    public AfterPerson person(String name) {
-        persons.add(name);
+    public AfterOrganiser organiser(String name) {
+        organisers.add(name);
         return this;
     }
 
@@ -65,7 +65,7 @@ public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, Aft
             return;
         }
 
-        eventContext.setPersons(persons.toArray(new String[]{}));
+        eventContext.setOrganisers(organisers.toArray(new String[]{}));
         events.add(eventContext);
     }
 

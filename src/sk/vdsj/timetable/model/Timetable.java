@@ -35,20 +35,19 @@ public class Timetable implements Serializable {
         }
 
         // sort by time_from
-        events.sort(Comparator.comparing((Event event) -> event.getTime().getTime_from()));
+        events.sort(Comparator.comparing((Event event) -> event.getTime().getStartTime()));
 
         return events;
     }
 
     public Schedule getScheduleByEvent(Event event){
-        Schedule schedule_that_i_wanted = null;
         for (Schedule schedule : schedules) {
             if(Arrays.asList(schedule.getEvents()).contains(event)){
-                schedule_that_i_wanted = schedule;
+                return schedule;
             }
         }
 
-        return schedule_that_i_wanted;
+        return null;
     }
 
     public ArrayList<String> getDays(){
@@ -97,12 +96,14 @@ public class Timetable implements Serializable {
     }
 
     public void validate() {
-        if (programme == null || semester == null || grade == null || schedules == null) {
-            throw new TimetableLanguageException("Missing required parameters in a Timetable");
-        }
-
-        if (schedules.length < 1) {
-            throw new TimetableLanguageException("Atleast one event is required in a Timetable");
+        if (programme == null || programme.isEmpty()) {
+            throw new TimetableLanguageException("Study programme isn't specified.");
+        } else if (semester == null || semester.isEmpty()) {
+            throw new TimetableLanguageException("Semester isn't specified.");
+        } else if (grade == null || grade.isEmpty()) {
+            throw new TimetableLanguageException("Grade isn't specified.");
+        } else if (schedules == null || schedules.length < 1) {
+            throw new TimetableLanguageException("At least one schedule is required in a timetable.");
         }
 
         for (var event: schedules) {
