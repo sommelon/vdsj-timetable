@@ -14,7 +14,7 @@ public class FunctionSequenceBuilder {
 
     private static ArrayList<Schedule> schedules = new ArrayList<>();
     private static ArrayList<Event> events;
-    private static ArrayList<String> persons;
+    private static ArrayList<String> organisers;
 
     public static void timetable(String programme, String semester, String grade) {
         timetable = new Timetable(programme, semester, grade, null);
@@ -27,14 +27,14 @@ public class FunctionSequenceBuilder {
         events = new ArrayList<>();
     }
 
-    public static void event(String type, String time, String room, String groups, String note) {
+    public static void event(String type, String time, String location, String groups, String note) {
         addPreviousEvent();
-        eventContext = new Event(type, Time.valueOf(time), room, groups, null, note);
-        persons = new ArrayList<>();
+        eventContext = new Event(type, Time.valueOf(time), location, groups, null, note);
+        organisers = new ArrayList<>();
     }
 
-    public static void person(String name) {
-        persons.add(name);
+    public static void organiser(String name) {
+        organisers.add(name);
     }
 
     private static void addPreviousSchedule() {
@@ -52,7 +52,7 @@ public class FunctionSequenceBuilder {
             return;
         }
 
-        eventContext.setPersons(persons.toArray(new String[]{}));
+        eventContext.setOrganisers(organisers.toArray(new String[]{}));
         events.add(eventContext);
     }
 

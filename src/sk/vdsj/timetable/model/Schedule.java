@@ -28,16 +28,21 @@ public class Schedule {
     }
 
     public void validate() {
-        if (title == null) {
-            throw new TimetableLanguageException("Missing title in a Schedule");
+        if (title == null || title.isEmpty()) {
+            throw new TimetableLanguageException("Missing title in a schedule.");
         }
 
         if (events.length < 1) {
-            throw new TimetableLanguageException("Atleast one schedule is required in a Schedule");
+            throw new TimetableLanguageException("At least one event is required in a schedule.");
         }
 
         for (var schedule: events) {
-            schedule.validate();
+            try {
+                schedule.validate();
+            } catch (TimetableLanguageException e) {
+                System.err.println("Error in schedule '" + title + "'.");
+                throw new TimetableLanguageException(e.getMessage());
+            }
         }
     }
 }

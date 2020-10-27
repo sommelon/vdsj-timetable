@@ -10,38 +10,38 @@ public class MainNestedFunction {
     public static void main(String[] args) {
         /***************************************************************/
 
-        TimeTable("Informatika",
+        timetable("Informatika",
                   "LS 2020/2021",
                   "BC1",
-                   Schedule("Vývoj doménovo-špecifických jazykov",
-                            Event("CL",
-                                  "ST 10:50-12:20",
+                   schedule("Vývoj doménovo-špecifických jazykov",
+                            event("CL",
+                                  "STR 10:50-12:20",
                                   "ZP1",
                                   "1, 2",
-                                  Person("Janko Hraško"),
+                                  organiser("Janko Hraško"),
                                   "Prezenčne"
                             ),
-                            Event("P",
-                                  "ST 13:30-15:00",
+                            event("P",
+                                  "STR 13:30-15:00",
                                   "ZP1",
                                   "1, 2",
-                                  Persons("Janko Hraško",
+                                  organisers("Janko Hraško",
                                           "Jožko Mrkvička"),
                                   "Hybridne"
                             )
                    ),
-                   Schedule("Paralelné programovanie",
-                            Event("CL",
+                   schedule("Paralelné programovanie",
+                            event("CL",
                                   "STV 10:50-12:20",
                                   "ZP1",
                                   "1, 2, 3",
-                                  Person("Ivan Gašparovič"),
+                                  organiser("Ivan Gašparovič"),
                                   "Prezenčne"
                             ),
-                            Event("P",
+                            event("P",
                                   "STV 13:30-15:00",
                                   "ZP1",
-                                  Persons("Ivan Gašparovič",
+                                  organisers("Ivan Gašparovič",
                                           "Ing. Andrej Danko, PhD")
                             )
                 )

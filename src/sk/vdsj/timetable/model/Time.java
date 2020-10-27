@@ -5,13 +5,13 @@ import java.time.LocalTime;
 
 public class Time {
     private DayOfWeek day;
-    private LocalTime time_from;
-    private LocalTime time_to;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
-    public Time(DayOfWeek day, LocalTime time_from, LocalTime time_to){
+    public Time(DayOfWeek day, LocalTime startTime, LocalTime endTime){
         this.day = day;
-        this.time_from = time_from;
-        this.time_to = time_to;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public DayOfWeek getDay() {
@@ -24,42 +24,59 @@ public class Time {
         this.day = day;
     }
 
-    public LocalTime getTime_from() {
-        return time_from;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public void setTime_from(LocalTime time_from) {
-        this.time_from = time_from;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
-    public LocalTime getTime_to() {
-        return time_to;
+    public LocalTime getEndTime() {
+        return endTime;
     }
 
-    public void setTime_to(LocalTime time_to) {
-        this.time_to = time_to;
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     public static Time valueOf(String time) {
-        DayOfWeek day = DayOfWeek.valueOf(Days.valueOf(time.substring(0,time.indexOf(' '))).getKey());
-        LocalTime startTime = LocalTime.parse(time.substring(time.indexOf(' ') + 1, time.indexOf('-')));
-        LocalTime endTIme = LocalTime.parse(time.substring(time.indexOf('-') + 1));
+        if (time == null) return null;
 
-        return new Time(day, startTime, endTIme);
+        DayOfWeek day;
+        LocalTime endTime;
+        LocalTime startTime;
+        try {
+            day = DayOfWeek.valueOf(Days.valueOf(time.substring(0, time.indexOf(' '))).getKey());
+            String startTimeString = time.substring(time.indexOf(' ') + 1, time.indexOf('-'));
+            if (startTimeString.length() == 4) { // ("H:MM").length() = 4
+                startTimeString = "0" + startTimeString;
+            }
+            startTime = LocalTime.parse(startTimeString);
+            endTime = LocalTime.parse(time.substring(time.indexOf('-') + 1));
+        } catch (Exception e) {
+            throw new TimetableLanguageException("Invalid time format: " + time);
+        }
+
+        return new Time(day, startTime, endTime);
     }
 
     public void validate() {
-        if (day == null || time_from == null || time_to == null) {
-            throw new TimetableLanguageException("Missing required parameters in a Time object");
+        if (day == null) {
+            throw new TimetableLanguageException("Day isn't specified.");
+        } else if (startTime == null) {
+            throw new TimetableLanguageException("Starting time isn't specified.");
+        } else if (endTime == null) {
+            throw new TimetableLanguageException("Ending time isn't specified.");
         }
 
-        if (time_from.isAfter(time_to)) {
-            throw new TimetableLanguageException("Starting time must be earlier than ending time");
+        if (startTime.isAfter(endTime)) {
+            throw new TimetableLanguageException("Starting time must be earlier than ending time.");
         }
     }
 
     @Override
     public String toString() {
-        return Days.valueOf(day.toString()).getKey() + " " + time_from.toString() + "-" + time_to.toString();
+        return Days.valueOf(day.toString()).getKey() + " " + startTime.toString() + "-" + endTime.toString();
     }
 }

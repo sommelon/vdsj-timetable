@@ -1,8 +1,8 @@
 package sk.vdsj.timetable.model;
 
 public enum Days {
-    PON("MONDAY"), UT("TUESDAY"), ST("WEDNESDAY"), STV("THURSDAY"), PIA("FRIDAY"),
-    MONDAY("PON"), TUESDAY("UT"), WEDNESDAY("ST"), THURSDAY("STV"), FRIDAY("PIA");
+    PON("MONDAY"), UTO("TUESDAY"), STR("WEDNESDAY"), STV("THURSDAY"), PIA("FRIDAY"),
+    MONDAY("PON"), TUESDAY("UTO"), WEDNESDAY("STR"), THURSDAY("STV"), FRIDAY("PIA");
 
     private final String key;
 
