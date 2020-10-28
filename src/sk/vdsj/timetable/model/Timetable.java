@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class Timetable implements Serializable {
     private String programme;
@@ -23,8 +24,8 @@ public class Timetable implements Serializable {
         return programme + " - " + semester + " - " + grade;
     }
 
-    public ArrayList<Event> getEventsByDay(String day){
-        ArrayList<Event> events = new ArrayList<>();
+    public List<Event> getEventsByDay(String day){
+        List<Event> events = new ArrayList<>();
 
         for(Schedule schedule : schedules){
             for(Event event : schedule.getEvents()){
@@ -50,9 +51,9 @@ public class Timetable implements Serializable {
         return null;
     }
 
-    public ArrayList<String> getDays(){
+    public List<String> getDays(){
 
-        ArrayList<String> days = new ArrayList<>();
+        List<String> days = new ArrayList<>();
         days.add("MONDAY");
         days.add("TUESDAY");
         days.add("WEDNESDAY");

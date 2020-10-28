@@ -10,15 +10,16 @@ import sk.vdsj.timetable.model.Time;
 import sk.vdsj.timetable.model.Timetable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, AfterEvent, AfterOrganiser {
     private static Timetable timetable;
     private static Schedule scheduleContext;
     private static Event eventContext;
 
-    private static ArrayList<Schedule> schedules = new ArrayList<>();
-    private static ArrayList<Event> events;
-    private static ArrayList<String> organisers;
+    private static List<Schedule> schedules = new ArrayList<>();
+    private static List<Event> events;
+    private static List<String> organisers;
 
     public static AfterTimetable timetable(String programme, String semester, String grade) {
         timetable = new Timetable(programme, semester, grade, null);
