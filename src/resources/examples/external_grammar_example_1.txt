@@ -1,0 +1,9 @@
+*** External DSL Example: ***
+Informatika LS 2020/2020 - BC1:
+	Vývoj domenovo špecifických jazykov:
+		CL(1,2): ST 10:50-12:20; Janko Hraško;
+		P(1,2): ST 13:30-15:00; Janko Hraško, Jurko Mrkvička;
+
+	Počítačová Grafika:
+		CL(1): ST 09:10-10:40; Janko Hraško;
+		CL(2): ST 10:50-12:20; Janko Hraško;
