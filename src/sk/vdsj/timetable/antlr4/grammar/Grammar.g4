@@ -12,19 +12,20 @@ schedule : scheduleName ':' event+?;
 
 scheduleName : STRING+;
 
-event : eventType '(' eventGroups ')' ':' day time_from '-' time_to ';' teacher (',' teacher)* ';';
+event : eventType '(' eventGroups ')' ':' time '-' room ';' teacher (',' teacher)* ('"' note '"')? ';';
 
+time: day time_from '-' time_to;
 eventType : STRING;
 eventGroups : NUMBER (',' NUMBER)*;
 day : STRING;
 time_from : NUMBER ':' NUMBER;
 time_to : NUMBER ':' NUMBER;
+room : STRING+;
 teacher : STRING+;
+note : STRING*;
 
 
 NUMBER: [0-9]+;
-
-PARAMETER : '"'~["]+'"';
 
 WS : ( ' ' | '\t' | '\r' | '\n' )+ -> skip;
 
