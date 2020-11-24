@@ -3,8 +3,11 @@ package sk.vdsj.timetable.main;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import sk.vdsj.timetable.antlr4.grammar.*;
+import sk.vdsj.timetable.antlr4.grammar.GrammarLexer;
+import sk.vdsj.timetable.antlr4.grammar.GrammarParser;
+import sk.vdsj.timetable.antlr4.grammar.GrammarParserVisitor;
+import sk.vdsj.timetable.model.Timetable;
+import sk.vdsj.timetable.semantics.TimetablePrinter;
 
 import java.io.IOException;
 
@@ -18,8 +21,14 @@ public class MainParserVisitor {
         GrammarParserVisitor visitor = new GrammarParserVisitor();
         visitor.visit(tree);
 
-        System.out.println(visitor.getTimetable());
+        Timetable timetable = visitor.getTimetable();
+        timetable.validate();
 
-
+        TimetablePrinter printer = new TimetablePrinter();
+        printer.print(timetable);
+//        try (Writer writer = new FileWriter("timetable.html")) {
+//            TimetableVelocityWebGenerator printer = new TimetableVelocityWebGenerator();
+//            printer.generate(timetable, writer);
+//        }
     }
 }
