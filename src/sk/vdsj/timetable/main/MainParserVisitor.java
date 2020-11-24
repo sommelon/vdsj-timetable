@@ -22,9 +22,7 @@ public class MainParserVisitor {
         ParseTree tree = parser.timetable();
 
         GrammarParserVisitor visitor = new GrammarParserVisitor();
-        visitor.visit(tree);
-
-        Timetable timetable = visitor.getTimetable();
+        Timetable timetable = ((Timetable) visitor.visit(tree));
         timetable.validate();
 
         TimetablePrinter printer = new TimetablePrinter();

@@ -3,6 +3,7 @@ out/
 *.interp
 *.tokens
 VDSJ-TimeTable.iml
+timetable.html
 src/sk/vdsj/timetable/antlr4/grammar/GrammarBaseListener.java
 src/sk/vdsj/timetable/antlr4/grammar/GrammarBaseVisitor.java
 src/sk/vdsj/timetable/antlr4/grammar/GrammarLexer.java

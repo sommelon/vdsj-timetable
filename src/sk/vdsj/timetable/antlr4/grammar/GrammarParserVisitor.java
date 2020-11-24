@@ -1,129 +1,110 @@
 package sk.vdsj.timetable.antlr4.grammar;
 
+import org.antlr.v4.runtime.ParserRuleContext;
 import sk.vdsj.timetable.model.Event;
 import sk.vdsj.timetable.model.Schedule;
 import sk.vdsj.timetable.model.Time;
 import sk.vdsj.timetable.model.Timetable;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class GrammarParserVisitor extends GrammarBaseVisitor<Void> {
-    private Timetable timetable;
-    private List<Schedule> schedules;
-    private Schedule schedule;
-    private List<Event> events;
-    private Event event;
-    private List<String> teachers;
-
-    public Timetable getTimetable() {
-        return timetable;
-    }
+public class GrammarParserVisitor extends GrammarBaseVisitor<Object> {
 
     @Override
-    public Void visitTimetable(GrammarParser.TimetableContext ctx) {
-        timetable = new Timetable(null, null, null, null);
-        schedules = new ArrayList<>();
-        events = new ArrayList<>();
-        return super.visitTimetable(ctx);
-    }
+    public Timetable visitTimetable(GrammarParser.TimetableContext ctx) {
+        String programme = (String) visit(ctx.timetableHeader().programme());
+        String semester = (String) visit(ctx.timetableHeader().semester());
+        String grade = (String) visit(ctx.timetableHeader().grade());
 
-    @Override
-    public Void visitTimetableName(GrammarParser.TimetableNameContext ctx) {
-        String[] name = new String[ctx.getChildCount()];
-        for (int x = 0; x < ctx.getChildCount(); x++) {
-            name[x] = ctx.getChild(x).getText();
+        Schedule[] schedules = new Schedule[ctx.schedule().size()];
+        for (int i = 0; i < ctx.schedule().size(); i++) {
+            schedules[i] = (Schedule) visit(ctx.schedule(i));
         }
-        timetable.setProgramme(String.join(" ", name));
-        super.visitTimetableName(ctx);
-        return super.visitTimetableName(ctx);
+
+        return new Timetable(programme, semester, grade, schedules);
     }
 
     @Override
-    public Void visitTimetableYear(GrammarParser.TimetableYearContext ctx) {
-        String halfYear = ctx.getChild(0).getText();
-        timetable.setSemester(halfYear + " " + ctx.getText().substring(halfYear.length()));
-        super.visitTimetableYear(ctx);
-        return super.visitTimetableYear(ctx);
+    public String visitProgramme(GrammarParser.ProgrammeContext ctx) {
+        return getSeparatedText(ctx);
     }
 
     @Override
-    public Void visitTimetableGrade(GrammarParser.TimetableGradeContext ctx) {
-        timetable.setGrade(ctx.getText());
-        return super.visitTimetableGrade(ctx);
+    public String visitSemester(GrammarParser.SemesterContext ctx) {
+        return ctx.STRING().getText() + " "
+                + ctx.NUMBER(0).getText() + ctx.getChild(2).getText() + ctx.NUMBER(1).getText();
     }
 
     @Override
-    public Void visitSchedule(GrammarParser.ScheduleContext ctx) {
-        schedule = new Schedule(null , null);
-        schedules.add(schedule);
-        timetable.setSchedules(schedules.toArray(new Schedule[0]));
-        return super.visitSchedule(ctx);
+    public String visitGrade(GrammarParser.GradeContext ctx) {
+        return ctx.getText();
     }
 
     @Override
-    public Void visitScheduleName(GrammarParser.ScheduleNameContext ctx) {
-        events = new ArrayList<>();
-        String[] name = new String[ctx.getChildCount()];
-        for (int x = 0; x < ctx.getChildCount(); x++) {
-            name[x] = ctx.getChild(x).getText();
+    public Schedule visitSchedule(GrammarParser.ScheduleContext ctx) {
+        Event[] events = new Event[ctx.event().size()];
+        for (int i = 0; i < ctx.event().size(); i++) {
+            events[i] = (Event) visit(ctx.event(i));
         }
-        schedule.setTitle(String.join(" ", name));
-        return super.visitScheduleName(ctx);
+
+        return new Schedule((String) visit(ctx.scheduleTitle()), events);
     }
 
     @Override
-    public Void visitEvent(GrammarParser.EventContext ctx) {
-        event = new Event(null, null, null, null, null, null);
-        teachers = new ArrayList<>();
-        events.add(event);
-        schedule.setEvents(events.toArray(new Event[0]));
-        return super.visitEvent(ctx);
+    public String visitScheduleTitle(GrammarParser.ScheduleTitleContext ctx) {
+        return getSeparatedText(ctx);
     }
 
     @Override
-    public Void visitTime(GrammarParser.TimeContext ctx) {
-        String day = ctx.getChild(0).getText();
-        event.setTime(Time.valueOf(day + " " + ctx.getText().substring(day.length())));
-        return super.visitTime(ctx);
-    }
+    public Event visitEvent(GrammarParser.EventContext ctx) {
+        String type = (String) visit(ctx.eventType());
+        Time time = (Time) visit(ctx.time());
+        String location = (String) visit(ctx.location());
+        String groups = (String) visit(ctx.groups());
 
-    @Override
-    public Void visitEventType(GrammarParser.EventTypeContext ctx) {
-        event.setType(ctx.getText());
-        return super.visitEventType(ctx);
-    }
-
-    @Override
-    public Void visitEventGroups(GrammarParser.EventGroupsContext ctx) {
-        event.setGroups(ctx.getText());
-        return super.visitEventGroups(ctx);
-    }
-
-    @Override
-    public Void visitRoom(GrammarParser.RoomContext ctx) {
-        event.setLocation(ctx.getText());
-        return super.visitRoom(ctx);
-    }
-
-    @Override
-    public Void visitTeacher(GrammarParser.TeacherContext ctx) {
-        String[] name = new String[ctx.getChildCount()];
-        for (int x = 0; x < ctx.getChildCount(); x++) {
-            name[x] = ctx.getChild(x).getText();
+        String[] organisers = new String[ctx.organiser().size()];
+        for (int i = 0; i < ctx.organiser().size(); i++) {
+            organisers[i] = (String) visit(ctx.organiser(i));
         }
-        teachers.add(String.join(" ", name));
-        event.setOrganisers(teachers.toArray(new String[0]));
-        return super.visitTeacher(ctx);
+        String note = ctx.note() != null ? (String) visit(ctx.note()) : null;
+
+        return new Event(type, time, location, groups, organisers, note);
     }
 
     @Override
-    public Void visitNote(GrammarParser.NoteContext ctx) {
-        String[] note = new String[ctx.getChildCount()];
+    public Object visitEventType(GrammarParser.EventTypeContext ctx) {
+        return ctx.getText();
+    }
+
+    @Override
+    public Time visitTime(GrammarParser.TimeContext ctx) {
+        return Time.valueOf(ctx.day().getText() + " "
+                + ctx.time_from().getText() + ctx.getChild(2).getText() + ctx.time_to().getText());
+    }
+
+    @Override
+    public Object visitLocation(GrammarParser.LocationContext ctx) {
+        return ctx.getText();
+    }
+
+    @Override
+    public String visitGroups(GrammarParser.GroupsContext ctx) {
+        return ctx.getText();
+    }
+
+    @Override
+    public String visitOrganiser(GrammarParser.OrganiserContext ctx) {
+        return getSeparatedText(ctx);
+    }
+
+    @Override
+    public String visitNote(GrammarParser.NoteContext ctx) {
+        return getSeparatedText(ctx);
+    }
+
+    private String getSeparatedText(ParserRuleContext ctx) {
+        String[] word = new String[ctx.getChildCount()];
         for (int x = 0; x < ctx.getChildCount(); x++) {
-            note[x] = ctx.getChild(x).getText();
+            word[x] = ctx.getChild(x).getText();
         }
-        event.setNote(String.join(" ", note));
-        return super.visitNote(ctx);
+        return String.join(" ", word);
     }
 }

@@ -1,5 +1,6 @@
 package sk.vdsj.timetable.antlr4.grammar;
 
+import org.antlr.v4.runtime.ParserRuleContext;
 import sk.vdsj.timetable.model.Event;
 import sk.vdsj.timetable.model.Schedule;
 import sk.vdsj.timetable.model.Time;
@@ -24,26 +25,22 @@ public class GrammarParserListener extends GrammarBaseListener {
     }
 
     @Override
-    public void enterTimetableName(GrammarParser.TimetableNameContext ctx) {
-        String[] name = new String[ctx.getChildCount()];
-        for (int x = 0; x < ctx.getChildCount(); x++) {
-            name[x] = ctx.getChild(x).getText();
-        }
-        timetable.setProgramme(String.join(" ", name));
-        super.enterTimetableName(ctx);
+    public void enterProgramme(GrammarParser.ProgrammeContext ctx) {
+        timetable.setProgramme(getSeparatedText(ctx));
+        super.enterProgramme(ctx);
     }
 
     @Override
-    public void enterTimetableYear(GrammarParser.TimetableYearContext ctx) {
+    public void enterSemester(GrammarParser.SemesterContext ctx) {
         String halfYear = ctx.getChild(0).getText();
         timetable.setSemester(halfYear + " " + ctx.getText().substring(halfYear.length()));
-        super.enterTimetableYear(ctx);
+        super.enterSemester(ctx);
     }
 
     @Override
-    public void enterTimetableGrade(GrammarParser.TimetableGradeContext ctx) {
+    public void enterGrade(GrammarParser.GradeContext ctx) {
         timetable.setGrade(ctx.getText());
-        super.enterTimetableGrade(ctx);
+        super.enterGrade(ctx);
     }
 
     @Override
@@ -53,14 +50,10 @@ public class GrammarParserListener extends GrammarBaseListener {
     }
 
     @Override
-    public void enterScheduleName(GrammarParser.ScheduleNameContext ctx) {
+    public void enterScheduleTitle(GrammarParser.ScheduleTitleContext ctx) {
         events = new ArrayList<>();
-        String[] name = new String[ctx.getChildCount()];
-        for (int x = 0; x < ctx.getChildCount(); x++) {
-            name[x] = ctx.getChild(x).getText();
-        }
-        schedule.setTitle(String.join(" ", name));
-        super.enterScheduleName(ctx);
+        schedule.setTitle(getSeparatedText(ctx));
+        super.enterScheduleTitle(ctx);
     }
 
     @Override
@@ -77,9 +70,9 @@ public class GrammarParserListener extends GrammarBaseListener {
     }
 
     @Override
-    public void enterEventGroups(GrammarParser.EventGroupsContext ctx) {
+    public void enterGroups(GrammarParser.GroupsContext ctx) {
         event.setGroups(ctx.getText());
-        super.enterEventGroups(ctx);
+        super.enterGroups(ctx);
     }
 
     @Override
@@ -90,28 +83,20 @@ public class GrammarParserListener extends GrammarBaseListener {
     }
 
     @Override
-    public void enterRoom(GrammarParser.RoomContext ctx) {
+    public void enterLocation(GrammarParser.LocationContext ctx) {
         event.setLocation(ctx.getText());
-        super.enterRoom(ctx);
+        super.enterLocation(ctx);
     }
 
     @Override
-    public void enterTeacher(GrammarParser.TeacherContext ctx) {
-        String[] name = new String[ctx.getChildCount()];
-        for (int x = 0; x < ctx.getChildCount(); x++) {
-            name[x] = ctx.getChild(x).getText();
-        }
-        teachers.add(String.join(" ", name));
-        super.enterTeacher(ctx);
+    public void enterOrganiser(GrammarParser.OrganiserContext ctx) {
+        teachers.add(getSeparatedText(ctx));
+        super.enterOrganiser(ctx);
     }
 
     @Override
     public void enterNote(GrammarParser.NoteContext ctx) {
-        String[] note = new String[ctx.getChildCount()];
-        for (int x = 0; x < ctx.getChildCount(); x++) {
-            note[x] = ctx.getChild(x).getText();
-        }
-        event.setNote(String.join(" ", note));
+        event.setNote(getSeparatedText(ctx));
         super.enterNote(ctx);
     }
 
@@ -137,5 +122,13 @@ public class GrammarParserListener extends GrammarBaseListener {
 
     public Timetable getTimetable() {
         return timetable;
+    }
+
+    private String getSeparatedText(ParserRuleContext ctx) {
+        String[] word = new String[ctx.getChildCount()];
+        for (int x = 0; x < ctx.getChildCount(); x++) {
+            word[x] = ctx.getChild(x).getText();
+        }
+        return String.join(" ", word);
     }
 }

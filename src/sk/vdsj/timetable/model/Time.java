@@ -49,11 +49,17 @@ public class Time {
         try {
             day = DayOfWeek.valueOf(Days.valueOf(time.substring(0, time.indexOf(' '))).getKey());
             String startTimeString = time.substring(time.indexOf(' ') + 1, time.indexOf('-'));
+            String endTimeString = time.substring(time.indexOf('-') + 1);
+
             if (startTimeString.length() == 4) { // ("H:MM").length() = 4
                 startTimeString = "0" + startTimeString;
             }
+            if (endTimeString.length() == 4) { // ("H:MM").length() = 4
+                endTimeString = "0" + endTimeString;
+            }
+
             startTime = LocalTime.parse(startTimeString);
-            endTime = LocalTime.parse(time.substring(time.indexOf('-') + 1));
+            endTime = LocalTime.parse(endTimeString);
         } catch (Exception e) {
             throw new TimetableLanguageException("Invalid time format: " + time);
         }

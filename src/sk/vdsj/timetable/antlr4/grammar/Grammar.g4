@@ -2,26 +2,26 @@ grammar Grammar;
 
 timetable : timetableHeader schedule+ EOF;
 
-timetableHeader : timetableName timetableYear '-' timetableGrade ':';
+timetableHeader : programme semester '-' grade ':';
 
-timetableName: STRING+;
-timetableYear: STRING NUMBER'/'NUMBER;
-timetableGrade: STRING;
+programme: STRING+;
+semester: STRING NUMBER'/'NUMBER;
+grade: STRING;
 
-schedule : scheduleName ':' event+?;
+schedule : scheduleTitle ':' event+?;
 
-scheduleName : STRING+;
+scheduleTitle : STRING+;
 
-event : eventType '(' eventGroups ')' ':' time '-' room ';' teacher (',' teacher)* ('"' note '"')? ';';
+event : eventType '(' groups ')' ':' time '-' location ';' organiser (',' organiser)* ('"' note '"')? ';';
 
 time: day time_from '-' time_to;
 eventType : STRING;
-eventGroups : NUMBER (',' NUMBER)*;
+groups : NUMBER (',' NUMBER)*;
 day : STRING;
 time_from : NUMBER ':' NUMBER;
 time_to : NUMBER ':' NUMBER;
-room : STRING+;
-teacher : STRING+;
+location : STRING+;
+organiser : STRING+;
 note : STRING*;
 
 
