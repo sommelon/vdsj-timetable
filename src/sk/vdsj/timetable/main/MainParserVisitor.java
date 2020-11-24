@@ -8,8 +8,11 @@ import sk.vdsj.timetable.antlr4.grammar.GrammarParser;
 import sk.vdsj.timetable.antlr4.grammar.GrammarParserVisitor;
 import sk.vdsj.timetable.model.Timetable;
 import sk.vdsj.timetable.semantics.TimetablePrinter;
+import sk.vdsj.timetable.semantics.TimetableVelocityWebGenerator;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 
 public class MainParserVisitor {
     public static void main(String[] args) throws IOException {
@@ -26,9 +29,10 @@ public class MainParserVisitor {
 
         TimetablePrinter printer = new TimetablePrinter();
         printer.print(timetable);
-//        try (Writer writer = new FileWriter("timetable.html")) {
-//            TimetableVelocityWebGenerator printer = new TimetableVelocityWebGenerator();
-//            printer.generate(timetable, writer);
-//        }
+
+        try (Writer writer = new FileWriter("timetable.html")) {
+            TimetableVelocityWebGenerator htmlPrinter = new TimetableVelocityWebGenerator();
+            htmlPrinter.generate(timetable, writer);
+        }
     }
 }
