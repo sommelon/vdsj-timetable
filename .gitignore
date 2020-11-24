@@ -1,1 +1,11 @@
 out/
+.idea/*
+*.interp
+*.tokens
+VDSJ-TimeTable.iml
+src/sk/vdsj/timetable/antlr4/grammar/GrammarBaseListener.java
+src/sk/vdsj/timetable/antlr4/grammar/GrammarBaseVisitor.java
+src/sk/vdsj/timetable/antlr4/grammar/GrammarLexer.java
+src/sk/vdsj/timetable/antlr4/grammar/GrammarListener.java
+src/sk/vdsj/timetable/antlr4/grammar/GrammarParser.java
+src/sk/vdsj/timetable/antlr4/grammar/GrammarVisitor.java
