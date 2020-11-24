@@ -46,7 +46,7 @@
                                         <br/>
 
                                     </small>
-                                    <h6 class="m-0">$event.note</h6>
+                                    <h6 class="m-0">$!event.note</h6>
                                 </div>
                             #end
                             </div>

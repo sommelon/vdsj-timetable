@@ -46,6 +46,15 @@ public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, Aft
     }
 
     @Override
+    public AfterEvent event(String type, String time, String location, String groups) {
+        addPreviousEvent();
+        eventContext = new Event(type, Time.valueOf(time), location, groups, null, null);
+        organisers = new ArrayList<>();
+
+        return this;
+    }
+
+    @Override
     public AfterOrganiser organiser(String name) {
         organisers.add(name);
         return this;
