@@ -107,8 +107,8 @@ public class Timetable implements Serializable {
             throw new TimetableLanguageException("At least one schedule is required in a timetable.");
         }
 
-        for (var event: schedules) {
-            event.validate();
+        for (var schedule: schedules) {
+            schedule.validate();
         }
     }
 }

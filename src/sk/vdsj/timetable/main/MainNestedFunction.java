@@ -13,7 +13,7 @@ public class MainNestedFunction {
         timetable("Informatika",
                   "LS 2020/2021",
                   "BC1",
-                   schedule("Vývoj doménovo-špecifických jazykov",
+                   schedule("Vývoj doménovo-špecifických jazykov", 1,
                             event("CL",
                                   "STR 10:50-12:20",
                                   "ZP1",
@@ -30,7 +30,7 @@ public class MainNestedFunction {
                                   "Hybridne"
                             )
                    ),
-                   schedule("Paralelné programovanie",
+                   schedule("Paralelné programovanie", 2,
                             event("CL",
                                   "STV 10:50-12:20",
                                   "ZP1",

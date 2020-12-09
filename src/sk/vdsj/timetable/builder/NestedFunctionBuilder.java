@@ -17,7 +17,11 @@ public class NestedFunctionBuilder {
     }
 
     public static Schedule schedule(String title, Event... events) {
-        return new Schedule(title, events);
+        return schedule(title, 1, events);
+    }
+
+    public static Schedule schedule(String title, int period, Event... events) {
+        return new Schedule(title, period, events);
     }
 
     public static String[] organiser(String name) {

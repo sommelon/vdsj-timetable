@@ -10,7 +10,7 @@ public class MainMethodChainingBuilder {
     public static void main(String[] args) {
         /***************************************************************/
         timetable("Informatika", "LS 2020/2021", "BC1").
-                schedule("Vývoj doménovo-špecifických jazykov").
+                schedule("Vývoj doménovo-špecifických jazykov", 2).
                     event("CL", "STR 10:50-12:20", "ZP1", "1, 2", "Prezenčne").
                         organiser("Ivan Gašparovič").
                         organiser("Ing. Andrej Danko, PhD").

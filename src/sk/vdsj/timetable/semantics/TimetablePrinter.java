@@ -17,7 +17,16 @@ public class TimetablePrinter {
     }
 
     private void print(Schedule schedule) {
-        System.out.println("Predmet: " + schedule.getTitle());
+        System.out.print("Predmet: " + schedule.getTitle());
+        if (schedule.getPeriod() != 1) {
+            if (schedule.getPeriod() < 5) {
+                System.out.println(" (Každé " + schedule.getPeriod() + " týždne)");
+            } else {
+                System.out.println(" (Každých " + schedule.getPeriod() + " týždňov)");
+            }
+        } else {
+            System.out.println();
+        }
 
         for (Event event : schedule.getEvents())
             print(event);

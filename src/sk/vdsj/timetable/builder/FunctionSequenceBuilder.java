@@ -22,10 +22,22 @@ public class FunctionSequenceBuilder {
     }
 
     public static void schedule(String title) {
+        schedule(title, 1);
+    }
+
+    public static void schedule(String title, int period) {
         addPreviousSchedule();
         eventContext = null;
-        scheduleContext = new Schedule(title, null);
+        scheduleContext = new Schedule(title, period,null);
         events = new ArrayList<>();
+    }
+
+    public static void event(String type, String time, String location) {
+        event(type, time, location, null);
+    }
+
+    public static void event(String type, String time, String location, String groups) {
+        event(type, time, location, groups, null);
     }
 
     public static void event(String type, String time, String location, String groups, String note) {
