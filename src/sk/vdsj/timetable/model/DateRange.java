@@ -30,11 +30,23 @@ public class DateRange {
     }
 
     public static DateRange valueOf(String dateRangeString) {
+        LocalDate startDate;
+        LocalDate endDate;
         String[] dates = dateRangeString.split(" - ");
-        LocalDate startDate = LocalDate.parse(dates[0], formatter);
-        LocalDate endDate = LocalDate.parse(dates[1], formatter);
+        try {
+            startDate = LocalDate.parse(dates[0], formatter);
+            endDate = LocalDate.parse(dates[1], formatter);
+        } catch (Exception e) {
+            throw new TimetableLanguageException("Invalid date format: " + dateRangeString);
+        }
 
         return new DateRange(startDate, endDate);
+    }
+
+    public void validate() {
+        if (start.isAfter(end)) {
+            throw new TimetableLanguageException("Starting date must be earlier than the ending date.");
+        }
     }
 
     @Override

@@ -63,7 +63,7 @@ public class GrammarParserVisitor extends GrammarBaseVisitor<Object> {
         }
         String note = ctx.note() != null ? (String) visit(ctx.note()) : null;
 
-        return new Event(type, time, location, groups, organisers, note);
+        return new Event(type, time, location, groups, organisers, note, 1); // TODO period
     }
 
     @Override

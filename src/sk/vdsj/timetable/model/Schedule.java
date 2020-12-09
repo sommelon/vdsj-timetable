@@ -2,17 +2,11 @@ package sk.vdsj.timetable.model;
 
 public class Schedule {
     private String title;
-    private int period;
     private Event[] events;
 
     public Schedule(String title, Event[] events) {
-        this(title, 1, events);
-    }
-
-    public Schedule(String title, int period, Event[] events) {
         this.title = title;
         this.events = events;
-        this.period = period;
     }
 
     // Getters and Setters
@@ -23,14 +17,6 @@ public class Schedule {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(Integer period) {
-        this.period = period;
     }
 
     public Event[] getEvents() {
@@ -44,10 +30,6 @@ public class Schedule {
     public void validate() {
         if (title == null || title.isEmpty()) {
             throw new TimetableLanguageException("Missing title in a schedule.");
-        }
-
-        if (period < 1) {
-            throw new TimetableLanguageException("Period must be a positive integer.");
         }
 
         if (events == null || events.length < 1) {

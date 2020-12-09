@@ -19,28 +19,28 @@ public class FunctionSequenceBuilder {
     }
 
     public static void schedule(String title) {
-        schedule(title, 1);
-    }
-
-    public static void schedule(String title, int period) {
         addPreviousSchedule();
         eventContext = null;
-        scheduleContext = new Schedule(title, period,null);
+        scheduleContext = new Schedule(title, null);
         events = new ArrayList<>();
     }
 
     public static void event(String type, String time, String location) {
-        event(type, time, location, null);
-    }
-
-    public static void event(String type, String time, String location, String groups) {
-        event(type, time, location, groups, null);
-    }
-
-    public static void event(String type, String time, String location, String groups, String note) {
         addPreviousEvent();
-        eventContext = new Event(type, Time.valueOf(time), location, groups, null, note);
+        eventContext = new Event(type, Time.valueOf(time), location, null, null, null, 1);
         organisers = new ArrayList<>();
+    }
+
+    public static void note(String note) {
+        eventContext.setNote(note);
+    }
+
+    public static void groups(String groups) {
+        eventContext.setGroups(groups);
+    }
+
+    public static void period(int period) {
+        eventContext.setPeriod(period);
     }
 
     public static void organiser(String name) {

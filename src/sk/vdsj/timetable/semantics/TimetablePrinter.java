@@ -18,16 +18,7 @@ public class TimetablePrinter {
     }
 
     private void print(Schedule schedule) {
-        System.out.print("Predmet: " + schedule.getTitle());
-        if (schedule.getPeriod() != 1) {
-            if (schedule.getPeriod() < 5) {
-                System.out.println(" (Každé " + schedule.getPeriod() + " týždne)");
-            } else {
-                System.out.println(" (Každých " + schedule.getPeriod() + " týždňov)");
-            }
-        } else {
-            System.out.println();
-        }
+        System.out.println("Predmet: " + schedule.getTitle());
 
         for (Event event : schedule.getEvents())
             print(event);
@@ -35,7 +26,17 @@ public class TimetablePrinter {
     }
 
     private void print(Event event) {
-        System.out.println("\tTyp hodiny: " + event.getType());
+        System.out.print("\tTyp hodiny: " + event.getType());
+        if (event.getPeriod() != 1) {
+            if (event.getPeriod() < 5) {
+                System.out.println(" (Každé " + event.getPeriod() + " týždne)");
+            } else {
+                System.out.println(" (Každých " + event.getPeriod() + " týždňov)");
+            }
+        } else {
+            System.out.println();
+        }
+
         System.out.print("\tVyučujúci: ");
         for (int i = 0; i < event.getOrganisers().length; i++) {
             if (i != 0) System.out.print("; ");

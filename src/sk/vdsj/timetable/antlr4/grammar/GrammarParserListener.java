@@ -58,7 +58,7 @@ public class GrammarParserListener extends GrammarBaseListener {
 
     @Override
     public void enterEvent(GrammarParser.EventContext ctx) {
-        event = new Event(null, null, null, null, null, null);
+        event = new Event(null, null, null, null, null, null, 1);
         teachers = new ArrayList<>();
         super.enterEvent(ctx);
     }

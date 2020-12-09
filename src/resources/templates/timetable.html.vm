@@ -34,7 +34,7 @@
                         <td>
                             <div class="row">
                             #foreach($event in $timetable.getEventsByDay($day))
-                                <div class="card m-1 p-2 text-left">
+                                <div class="card m-1 p-2 text-left #if($event.getPeriod() != 1)periodic#end">
                                     <small>
                                         <h6>$event.type: $timetable.getScheduleByEvent($event).getTitle()</h6>
                                         <strong style="font-size: 15px;">$event.time.getStartTime() - $event.time.getEndTime()</strong><br/>

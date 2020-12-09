@@ -14,11 +14,7 @@ public class NestedFunctionBuilder {
     }
 
     public static Schedule schedule(String title, Event... events) {
-        return schedule(title, 1, events);
-    }
-
-    public static Schedule schedule(String title, int period, Event... events) {
-        return new Schedule(title, period, events);
+        return new Schedule(title, events);
     }
 
     public static String[] organiser(String name) {
@@ -30,19 +26,37 @@ public class NestedFunctionBuilder {
     }
 
     // All options for event
+    // With groups
+    public static Event event(String type, String time, String location, String groups, String[] organisers, String note, int period) {
+        return new Event(type, Time.valueOf(time), location, groups, organisers, note, period);
+    }
+
     public static Event event(String type, String time, String location, String groups, String[] organisers, String note) {
-        return new Event(type, Time.valueOf(time), location, groups, organisers, note);
+        return new Event(type, Time.valueOf(time), location, groups, organisers, note, 1);
+    }
+
+    public static Event event(String type, String time, String location, String groups, String[] organisers, int period) {
+        return new Event(type, Time.valueOf(time), location, groups, organisers, null, period);
     }
 
     public static Event event(String type, String time, String location, String groups, String... organisers) {
-        return new Event(type, Time.valueOf(time), location, groups, organisers, null);
+        return new Event(type, Time.valueOf(time), location, groups, organisers, null, 1);
+    }
+
+    // Without groups
+    public static Event event(String type, String time, String location, String... organisers) {
+        return new Event(type, Time.valueOf(time), location, null, organisers, null, 1);
+    }
+
+    public static Event event(String type, String time, String location, String[] organisers, String note, int period) {
+        return new Event(type, Time.valueOf(time), location, null, organisers, note, period);
     }
 
     public static Event event(String type, String time, String location, String[] organisers, String note) {
-        return new Event(type, Time.valueOf(time), location, null, organisers, note);
+        return new Event(type, Time.valueOf(time), location, null, organisers, note, 1);
     }
 
-    public static Event event(String type, String time, String location, String... organisers) {
-        return new Event(type, Time.valueOf(time), location, null, organisers, null);
+    public static Event event(String type, String time, String location, String[] organisers, int period) {
+        return new Event(type, Time.valueOf(time), location, null, organisers, null, period);
     }
 }
