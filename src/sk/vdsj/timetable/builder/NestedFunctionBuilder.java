@@ -1,9 +1,6 @@
 package sk.vdsj.timetable.builder;
 
-import sk.vdsj.timetable.model.Event;
-import sk.vdsj.timetable.model.Schedule;
-import sk.vdsj.timetable.model.Time;
-import sk.vdsj.timetable.model.Timetable;
+import sk.vdsj.timetable.model.*;
 
 public class NestedFunctionBuilder {
     private static Timetable timeTable;
@@ -12,8 +9,8 @@ public class NestedFunctionBuilder {
         return timeTable;
     }
 
-    public static void timetable(String programme, String semester, String grade, Schedule... schedules) {
-        timeTable = new Timetable(programme, semester, grade, schedules);
+    public static void timetable(String programme, String semester, String startDate, String endDate, String grade, Schedule... schedules) {
+        timeTable = new Timetable(programme, semester, DateRange.valueOf(startDate + " - " + endDate), grade, schedules);
     }
 
     public static Schedule schedule(String title, Event... events) {

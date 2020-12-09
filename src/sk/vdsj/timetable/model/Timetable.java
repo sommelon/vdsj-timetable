@@ -9,12 +9,14 @@ import java.util.List;
 public class Timetable implements Serializable {
     private String programme;
     private String semester;
+    private DateRange dateRange;
     private String grade;
     private Schedule[] schedules;
 
-    public Timetable(String programme, String semester, String grade, Schedule[] schedules) {
+    public Timetable(String programme, String semester, DateRange dateRange, String grade, Schedule[] schedules) {
         this.programme = programme;
         this.semester = semester;
+        this.dateRange = dateRange;
         this.grade = grade;
         this.schedules = schedules;
     }
@@ -78,6 +80,14 @@ public class Timetable implements Serializable {
 
     public void setSemester(String semester) {
         this.semester = semester;
+    }
+
+    public DateRange getDateRange() {
+        return dateRange;
+    }
+
+    public void setDateRange(DateRange dateRange) {
+        this.dateRange = dateRange;
     }
 
     public String getGrade() {

@@ -1,10 +1,7 @@
 package sk.vdsj.timetable.antlr4.grammar;
 
 import org.antlr.v4.runtime.ParserRuleContext;
-import sk.vdsj.timetable.model.Event;
-import sk.vdsj.timetable.model.Schedule;
-import sk.vdsj.timetable.model.Time;
-import sk.vdsj.timetable.model.Timetable;
+import sk.vdsj.timetable.model.*;
 
 public class GrammarParserVisitor extends GrammarBaseVisitor<Object> {
 
@@ -19,7 +16,7 @@ public class GrammarParserVisitor extends GrammarBaseVisitor<Object> {
             schedules[i] = (Schedule) visit(ctx.schedule(i));
         }
 
-        return new Timetable(programme, semester, grade, schedules);
+        return new Timetable(programme, semester, DateRange.valueOf("temporary for compilation"), grade, schedules);
     }
 
     @Override

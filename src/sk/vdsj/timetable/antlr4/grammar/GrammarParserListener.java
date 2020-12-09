@@ -19,7 +19,7 @@ public class GrammarParserListener extends GrammarBaseListener {
 
     @Override
     public void enterTimetable(GrammarParser.TimetableContext ctx) {
-        timetable = new Timetable(null, null, null, null);
+        timetable = new Timetable(null, null, null, null, null);
         schedules = new ArrayList<>();
         super.enterTimetable(ctx);
     }

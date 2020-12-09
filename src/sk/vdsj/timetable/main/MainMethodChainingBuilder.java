@@ -9,7 +9,7 @@ import static sk.vdsj.timetable.builder.MethodChainingBuilder.timetable;
 public class MainMethodChainingBuilder {
     public static void main(String[] args) {
         /***************************************************************/
-        timetable("Informatika", "LS 2020/2021", "BC1").
+        timetable("Informatika", "LS 2020/2021","12.09.2020", "21.12.2020", "BC1").
                 schedule("Vývoj doménovo-špecifických jazykov", 2).
                     event("CL", "STR 10:50-12:20", "ZP1", "1, 2", "Prezenčne").
                         organiser("Ivan Gašparovič").

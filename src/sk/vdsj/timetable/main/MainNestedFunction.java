@@ -12,7 +12,9 @@ public class MainNestedFunction {
 
         timetable("Informatika",
                   "LS 2020/2021",
-                  "BC1",
+                "12.09.2020",
+                "21.12.2020",
+                "BC1",
                    schedule("Vývoj doménovo-špecifických jazykov", 1,
                             event("CL",
                                   "STR 10:50-12:20",

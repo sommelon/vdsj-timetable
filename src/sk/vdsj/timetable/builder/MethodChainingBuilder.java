@@ -4,10 +4,7 @@ import sk.vdsj.timetable.builder.types.AfterEvent;
 import sk.vdsj.timetable.builder.types.AfterOrganiser;
 import sk.vdsj.timetable.builder.types.AfterSchedule;
 import sk.vdsj.timetable.builder.types.AfterTimetable;
-import sk.vdsj.timetable.model.Event;
-import sk.vdsj.timetable.model.Schedule;
-import sk.vdsj.timetable.model.Time;
-import sk.vdsj.timetable.model.Timetable;
+import sk.vdsj.timetable.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +18,8 @@ public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, Aft
     private static List<Event> events;
     private static List<String> organisers;
 
-    public static AfterTimetable timetable(String programme, String semester, String grade) {
-        timetable = new Timetable(programme, semester, grade, null);
+    public static AfterTimetable timetable(String programme, String semester, String startDate, String endDate, String grade) {
+        timetable = new Timetable(programme, semester, DateRange.valueOf(startDate + " - " + endDate), grade, null);
         return new MethodChainingBuilder();
     }
 

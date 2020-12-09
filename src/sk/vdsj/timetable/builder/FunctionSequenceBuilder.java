@@ -1,9 +1,6 @@
 package sk.vdsj.timetable.builder;
 
-import sk.vdsj.timetable.model.Event;
-import sk.vdsj.timetable.model.Schedule;
-import sk.vdsj.timetable.model.Time;
-import sk.vdsj.timetable.model.Timetable;
+import sk.vdsj.timetable.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +14,8 @@ public class FunctionSequenceBuilder {
     private static List<Event> events;
     private static List<String> organisers;
 
-    public static void timetable(String programme, String semester, String grade) {
-        timetable = new Timetable(programme, semester, grade, null);
+    public static void timetable(String programme, String semester, String startDate, String endDate, String grade) {
+        timetable = new Timetable(programme, semester, DateRange.valueOf(startDate + " - " + endDate), grade, null);
     }
 
     public static void schedule(String title) {
