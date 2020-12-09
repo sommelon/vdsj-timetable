@@ -32,7 +32,7 @@ public class Schedule {
             throw new TimetableLanguageException("Missing title in a schedule.");
         }
 
-        if (events.length < 1) {
+        if (events == null || events.length < 1) {
             throw new TimetableLanguageException("At least one event is required in a schedule.");
         }
 

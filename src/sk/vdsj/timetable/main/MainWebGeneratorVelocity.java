@@ -25,7 +25,7 @@ public class MainWebGeneratorVelocity {
                 event("CL", "STV 10:50-12:20", "ZP1", "1, 2", "Prezenčne").
                 organiser("Ivan Gašparovič").
                 organiser("Ing. Andrej Danko, PhD").
-                event("P", "STV 13:30-15:00", "ZP1", "1, 2", "Hybridne").
+                event("P", "STV 13:30-15:00", "ZP1", "1, 2").
                 organiser("Janko Hraško").
                 organiser("Jožko Mrkvička")
         /***************************************************************/

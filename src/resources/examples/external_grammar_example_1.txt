@@ -1,0 +1,9 @@
+*** External DSL Example: ***
+Informatika LS 2020/2021 - BC1:
+	Vývoj domenovo špecifických jazykov:
+		CL(1,2): STR 10:50-12:20 - ZP1; Janko Hraško;
+		P(1,2): STR 13:30-15:00 - ZP2; Janko Hraško, Jurko Mrkvička "Specialna Poznamka";
+
+	Počítačová Grafika:
+		CL(1): STV 09:10-10:40 - ZP1; Janko Hraško;
+		CL(2): STV 10:50-12:20 - ZP2; Janko Hraško;
