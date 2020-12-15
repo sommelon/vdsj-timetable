@@ -45,9 +45,9 @@ public class TimetablePrinter {
         System.out.println();
         System.out.println("\tTermín: " + event.getTime());
         System.out.println("\tMiestnosť: " + event.getLocation());
-        if (event.getGroups() != null)
+        if (event.getGroups() != null && !event.getGroups().isEmpty())
             System.out.println("\tSkupiny: " + event.getGroups());
-        if (event.getNote() != null)
+        if (event.getNote() != null && !event.getNote().isEmpty())
             System.out.println("\tPoznámka: " + event.getNote());
         System.out.println();
     }
