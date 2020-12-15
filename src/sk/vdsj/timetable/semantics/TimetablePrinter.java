@@ -9,7 +9,7 @@ public class TimetablePrinter {
     public void print(Timetable timetable) {
         System.out.println("Študijný program: " + timetable.getProgramme());
         System.out.println("Semester: " + timetable.getSemester());
-        System.out.println("Rozsah: " + timetable.getPeriod());
+        System.out.println("Rozsah semestra: " + timetable.getPeriod());
         System.out.println("Ročník: " + timetable.getGrade());
         System.out.println("---------------------------------------------");
 

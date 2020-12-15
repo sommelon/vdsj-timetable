@@ -32,7 +32,7 @@ public class DateRange {
     public static DateRange valueOf(String periodString) {
         LocalDate startDate;
         LocalDate endDate;
-        String[] dates = periodString.split(" - ");
+        String[] dates = periodString.split("-");
         try {
             startDate = LocalDate.parse(dates[0], formatter);
             endDate = LocalDate.parse(dates[1], formatter);
@@ -51,6 +51,6 @@ public class DateRange {
 
     @Override
     public String toString() {
-        return start.format(formatter) + " - " + end.format(formatter) ;
+        return start.format(formatter) + "-" + end.format(formatter) ;
     }
 }
