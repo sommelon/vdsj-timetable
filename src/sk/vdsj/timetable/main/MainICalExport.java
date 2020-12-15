@@ -104,8 +104,8 @@ public class MainICalExport {
         endDate.set(java.util.Calendar.DAY_OF_WEEK, shiftDayOfWeek(event.getTime().getDay().ordinal()));
         endDate.set(java.util.Calendar.YEAR, startOfSemester.getYear());
         endDate.set(java.util.Calendar.HOUR_OF_DAY, event.getTime().getEndTime().getHour());
-        endDate.set(java.util.Calendar.MINUTE, event.getTime().getEndTime().getHour());
-        endDate.set(java.util.Calendar.SECOND, event.getTime().getEndTime().getHour());
+        endDate.set(java.util.Calendar.MINUTE, event.getTime().getEndTime().getMinute());
+        endDate.set(java.util.Calendar.SECOND, event.getTime().getEndTime().getSecond());
 
         // Create the event
         String eventName = '(' + event.getType() + ") " + name;
