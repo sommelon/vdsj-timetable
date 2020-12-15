@@ -20,7 +20,7 @@ public class MainWebGeneratorVelocity {
                 organiser("Ing. Andrej Danko, PhD").
                 groups("1, 2").
                 note("Prezenčne").
-                period(4).
+                interval(4).
                 event("P", "STR 13:30-15:00", "ZP1").
                 organiser("Janko Hraško").
                 organiser("Jožko Mrkvička").

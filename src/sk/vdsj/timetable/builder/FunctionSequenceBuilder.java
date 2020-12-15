@@ -39,8 +39,8 @@ public class FunctionSequenceBuilder {
         eventContext.setGroups(groups);
     }
 
-    public static void period(int period) {
-        eventContext.setPeriod(period);
+    public static void interval(int interval) {
+        eventContext.setInterval(interval);
     }
 
     public static void organiser(String name) {

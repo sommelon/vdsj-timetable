@@ -15,6 +15,10 @@
                 opacity: 1;
             }
 
+            .interval{
+                display: none;
+            }
+
         </style>
     </head>
 
@@ -34,7 +38,7 @@
                         <td>
                             <div class="row">
                             #foreach($event in $timetable.getEventsByDay($day))
-                                <div class="card m-1 p-2 text-left #if($event.getPeriod() != 1)periodic#end">
+                                <div class="card m-1 p-2 text-left #if($event.getInterval() != 1)interval#end">
                                     <small>
                                         <h6>$event.type: $timetable.getScheduleByEvent($event).getTitle()</h6>
                                         <strong style="font-size: 15px;">$event.time.getStartTime() - $event.time.getEndTime()</strong><br/>

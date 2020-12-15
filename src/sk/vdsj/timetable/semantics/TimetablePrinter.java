@@ -9,7 +9,7 @@ public class TimetablePrinter {
     public void print(Timetable timetable) {
         System.out.println("Študijný program: " + timetable.getProgramme());
         System.out.println("Semester: " + timetable.getSemester());
-        System.out.println("Rozsah: " + timetable.getDateRange());
+        System.out.println("Rozsah: " + timetable.getPeriod());
         System.out.println("Ročník: " + timetable.getGrade());
         System.out.println("---------------------------------------------");
 
@@ -27,11 +27,11 @@ public class TimetablePrinter {
 
     private void print(Event event) {
         System.out.print("\tTyp hodiny: " + event.getType());
-        if (event.getPeriod() != 1) {
-            if (event.getPeriod() < 5) {
-                System.out.println(" (Každé " + event.getPeriod() + " týždne)");
+        if (event.getInterval() != 1) {
+            if (event.getInterval() < 5) {
+                System.out.println(" (Každé " + event.getInterval() + " týždne)");
             } else {
-                System.out.println(" (Každých " + event.getPeriod() + " týždňov)");
+                System.out.println(" (Každých " + event.getInterval() + " týždňov)");
             }
         } else {
             System.out.println();

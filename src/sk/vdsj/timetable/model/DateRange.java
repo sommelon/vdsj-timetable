@@ -29,15 +29,15 @@ public class DateRange {
         this.end = end;
     }
 
-    public static DateRange valueOf(String dateRangeString) {
+    public static DateRange valueOf(String periodString) {
         LocalDate startDate;
         LocalDate endDate;
-        String[] dates = dateRangeString.split(" - ");
+        String[] dates = periodString.split(" - ");
         try {
             startDate = LocalDate.parse(dates[0], formatter);
             endDate = LocalDate.parse(dates[1], formatter);
         } catch (Exception e) {
-            throw new TimetableLanguageException("Invalid date format: " + dateRangeString);
+            throw new TimetableLanguageException("Invalid date format: " + periodString);
         }
 
         return new DateRange(startDate, endDate);

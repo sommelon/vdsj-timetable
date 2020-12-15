@@ -16,7 +16,7 @@ public class MainFunctionSequence {
                 groups("1, 2");
                 organiser("Ivan Gašparovič");
                 organiser("Ing. Andrej Danko, PhD");
-                period(2);
+                interval(2);
                 note("Prezenčne");
             event("P", "STR 13:30-15:00", "ZP1");
                 groups("1, 2");

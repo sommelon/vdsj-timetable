@@ -58,8 +58,8 @@ public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, Aft
     }
 
     @Override
-    public AfterOptional period(int period) {
-        eventContext.setPeriod(period);
+    public AfterOptional interval(int interval) {
+        eventContext.setInterval(interval);
         return this;
     }
 
