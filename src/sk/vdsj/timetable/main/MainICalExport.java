@@ -51,8 +51,8 @@ public class MainICalExport {
         TimetablePrinter printer = new TimetablePrinter();
         printer.print(timetable);
 
-        try (Writer writer = new FileWriter("timetable.html")) {
-            TimetableVelocityWebGenerator htmlPrinter = new TimetableVelocityWebGenerator();
+        try (Writer writer = new FileWriter("index.html")) {
+            TimetableVelocityWebGenerator htmlPrinter = new TimetableVelocityWebGenerator("ical_timetable.html.vm");
             htmlPrinter.generate(timetable, writer);
         }
 
@@ -108,7 +108,7 @@ public class MainICalExport {
         endDate.set(java.util.Calendar.SECOND, event.getTime().getEndTime().getSecond());
 
         // Create the event
-        String eventName = '(' + event.getType() + ") " + name;
+        String eventName = event.getType() + " (" +event.getGroups()+ ") " + name + "\n" + event.getNote();
         DateTime start = new DateTime(startDate.getTime());
         DateTime end = new DateTime(endDate.getTime());
         VEvent meeting = new VEvent(start, end, eventName);

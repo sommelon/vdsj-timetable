@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+
+    <title>Ical + Velocity - Web Based Calendar</title>
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/locales-all.js'></script>
+
+
+    <script src="assets/ical.js"></script>
+    <script src="assets/ical_events.js"></script>
+    <script src="assets/ical_fullcalendar.js"></script>
+    <script src="assets/vdsj.js"></script>
+
+    <style>
+        body {
+            font-family: 'Calibri';
+            font-size: 15px;
+        }
+        #calendar {
+            max-width: 1300px;
+            margin: 5rem auto 2em;
+        }
+
+        .fc-time-grid .fc-event, .fc-time-grid .fc-bgevent {
+            position: absolute;
+            height: 75px;
+            border-radius: 0;
+            padding: .5rem;
+        }
+    </style>
+
+</head>
+<body>
+    <h2 style="margin-top: 10px; text-align: center;">$timetable.getFullTitle()</h2>
+    <h1 style="margin-top: 10px; text-align: center;">$timetable.getPeriod()</h1>
+    <div id='calendar'></div>
+</body>
+</html>

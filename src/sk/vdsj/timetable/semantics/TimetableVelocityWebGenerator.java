@@ -12,6 +12,17 @@ import java.util.Map;
 import java.util.Properties;
 
 public class TimetableVelocityWebGenerator {
+
+    private String template_name = "timetable.html.vm";
+
+    public TimetableVelocityWebGenerator(){
+        // pass
+    }
+
+    public TimetableVelocityWebGenerator(String template_name){
+        this.template_name = template_name;
+    }
+
     static {
         try {
             Properties properties = new Properties();
@@ -24,7 +35,7 @@ public class TimetableVelocityWebGenerator {
 
     public void generate(Timetable timetable, Writer writer) throws IOException {
         //Zvoľme šablónu
-        Template template = Velocity.getTemplate("src/resources/templates/timetable.html.vm");
+        Template template = Velocity.getTemplate("src/resources/templates/"+this.template_name);
 
         //Pripravme parametre pre šablónu - objekt timetable
         Map<String, Object> params = new HashMap<>();
