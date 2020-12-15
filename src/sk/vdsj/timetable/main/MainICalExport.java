@@ -108,10 +108,13 @@ public class MainICalExport {
         endDate.set(java.util.Calendar.SECOND, event.getTime().getEndTime().getSecond());
 
         // Create the event
-        String eventName = event.getType() + " (" +event.getGroups()+ ") " + name + "\n" + event.getNote();
+        String eventName = event.getType() + (event.getGroups().equals("") ? " (" +event.getGroups()+ ") " : " ") + name;
         DateTime start = new DateTime(startDate.getTime());
         DateTime end = new DateTime(endDate.getTime());
         VEvent meeting = new VEvent(start, end, eventName);
+        Description description = new Description(event.getNote());
+
+
 
         // add timezone info..
         meeting.getProperties().add(tz.getTimeZoneId());
@@ -134,6 +137,7 @@ public class MainICalExport {
         meeting.getProperties().add(org);
 
         meeting.getProperties().add(new Location(event.getLocation()));
+        meeting.getProperties().add(description);
 
         try {
             meeting.getProperties().add(new RRule(recurrencePattern));
@@ -145,7 +149,7 @@ public class MainICalExport {
     }
 
     private static int shiftDayOfWeek(int x) {
-        return (x + 2)%6;
+        return (x + 2)%7;
     }
 
 }

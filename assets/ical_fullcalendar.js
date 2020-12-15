@@ -54,11 +54,20 @@ function merge_events(e, f) {
 }
 
 function fc_event(event, event_callback) {
-    console.log(event);
+    //console.log(event);
     const objectArray = event.jCal[1];
     const organizers = objectArray[7];
     var location = objectArray[8];
     const locationNext = objectArray[9];
+    var note = locationNext[0];
+
+    if(note === "description"){
+        note = locationNext[3];
+    } else {
+        note = "";
+    }
+
+    //console.log(locationNext[3]);
     if( location[0] === "location" ){
         location = location[3];
     } else {
@@ -66,7 +75,7 @@ function fc_event(event, event_callback) {
     }
     //console.log(organizers[1]['cn']);
     e = {
-        title:event.getFirstPropertyValue('summary')+" \n"+ location +" - "+organizers[1]['cn'],
+        title:event.getFirstPropertyValue('summary')+" \n"+ location +" - "+organizers[1]['cn']  +"\n"+note,
         url:event.getFirstPropertyValue('url'),
         id:event.getFirstPropertyValue('uid'),
         className:['event-'+an_filter(event.getFirstPropertyValue('uid'))],

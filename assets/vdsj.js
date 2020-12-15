@@ -28,14 +28,28 @@ function load_ics(ics){
 
 $(document).ready(function() {
     $('#calendar').fullCalendar({
-        locale: 'sk',
         header: {
             left: 'prev,next today',
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
+        buttonText: {
+            today:    'Dnes',
+            month:    'Mesiac',
+            week:     'Týždeň',
+            day:      'Deň',
+            list:     'List'
+        },
+        lang: 'sk',
+        firstDay: 1,
         defaultView: 'agendaWeek',
-        defaultDate: '2020-12-15'
+        defaultDate: '2020-12-15',
+        eventClick: function(event) {
+            // opens events in a popup window
+            $('#popup').html(event.title);
+            $('#popup').show();
+            return false;
+        },
     })
     sources_to_load_cnt = ics_sources.length
     ics_sources.forEach(function(ics){

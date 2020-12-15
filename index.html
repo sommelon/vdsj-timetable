@@ -7,10 +7,12 @@
 
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.css' rel='stylesheet' />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.print.css' rel='stylesheet' media='print' />
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/locales-all.js'></script>
+
+    <script src='assets/moment.min.js'></script>
+    <script src='assets/jquery.min.js'></script>
+    <script src='assets/fullcalendar.js'></script>
+    <script src="assets/locale-all.min.js"></script>
+    <script src="assets/sk.js"></script>
 
 
     <script src="assets/ical.js"></script>
@@ -34,6 +36,10 @@
             border-radius: 0;
             padding: .5rem;
         }
+
+        #popup {
+            display: none;
+        }
     </style>
 
 </head>
@@ -41,5 +47,9 @@
     <h2 style="margin-top: 10px; text-align: center;">Informatika - LS 2020/2021 - BC1</h2>
     <h1 style="margin-top: 10px; text-align: center;">21.10.2020-22.12.2020</h1>
     <div id='calendar'></div>
+    <div id="popup"></div>
+
+
+
 </body>
 </html>
