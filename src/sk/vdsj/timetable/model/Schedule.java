@@ -36,9 +36,9 @@ public class Schedule {
             throw new TimetableLanguageException("At least one event is required in a schedule.");
         }
 
-        for (var schedule: events) {
+        for (var event: events) {
             try {
-                schedule.validate();
+                event.validate();
             } catch (TimetableLanguageException e) {
                 System.err.println("Error in schedule '" + title + "'.");
                 throw new TimetableLanguageException(e.getMessage());

@@ -1,9 +1,6 @@
 package sk.vdsj.timetable.builder;
 
-import sk.vdsj.timetable.model.Event;
-import sk.vdsj.timetable.model.Schedule;
-import sk.vdsj.timetable.model.Time;
-import sk.vdsj.timetable.model.Timetable;
+import sk.vdsj.timetable.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +14,8 @@ public class FunctionSequenceBuilder {
     private static List<Event> events;
     private static List<String> organisers;
 
-    public static void timetable(String programme, String semester, String grade) {
-        timetable = new Timetable(programme, semester, grade, null);
+    public static void timetable(String programme, String semester, String startDate, String endDate, String grade) {
+        timetable = new Timetable(programme, semester, DateRange.valueOf(startDate + " - " + endDate), grade, null);
     }
 
     public static void schedule(String title) {
@@ -28,10 +25,22 @@ public class FunctionSequenceBuilder {
         events = new ArrayList<>();
     }
 
-    public static void event(String type, String time, String location, String groups, String note) {
+    public static void event(String type, String time, String location) {
         addPreviousEvent();
-        eventContext = new Event(type, Time.valueOf(time), location, groups, null, note);
+        eventContext = new Event(type, Time.valueOf(time), location, null, null, null, 1);
         organisers = new ArrayList<>();
+    }
+
+    public static void note(String note) {
+        eventContext.setNote(note);
+    }
+
+    public static void groups(String groups) {
+        eventContext.setGroups(groups);
+    }
+
+    public static void interval(int interval) {
+        eventContext.setInterval(interval);
     }
 
     public static void organiser(String name) {

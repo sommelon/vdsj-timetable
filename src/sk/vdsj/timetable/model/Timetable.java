@@ -9,12 +9,14 @@ import java.util.List;
 public class Timetable implements Serializable {
     private String programme;
     private String semester;
+    private DateRange period;
     private String grade;
     private Schedule[] schedules;
 
-    public Timetable(String programme, String semester, String grade, Schedule[] schedules) {
+    public Timetable(String programme, String semester, DateRange period, String grade, Schedule[] schedules) {
         this.programme = programme;
         this.semester = semester;
+        this.period = period;
         this.grade = grade;
         this.schedules = schedules;
     }
@@ -80,6 +82,14 @@ public class Timetable implements Serializable {
         this.semester = semester;
     }
 
+    public DateRange getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(DateRange period) {
+        this.period = period;
+    }
+
     public String getGrade() {
         return grade;
     }
@@ -107,8 +117,10 @@ public class Timetable implements Serializable {
             throw new TimetableLanguageException("At least one schedule is required in a timetable.");
         }
 
-        for (var event: schedules) {
-            event.validate();
+        period.validate();
+
+        for (var schedule: schedules) {
+            schedule.validate();
         }
     }
 }

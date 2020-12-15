@@ -1,18 +1,12 @@
 package sk.vdsj.timetable.builder;
 
-import sk.vdsj.timetable.builder.types.AfterEvent;
-import sk.vdsj.timetable.builder.types.AfterOrganiser;
-import sk.vdsj.timetable.builder.types.AfterSchedule;
-import sk.vdsj.timetable.builder.types.AfterTimetable;
-import sk.vdsj.timetable.model.Event;
-import sk.vdsj.timetable.model.Schedule;
-import sk.vdsj.timetable.model.Time;
-import sk.vdsj.timetable.model.Timetable;
+import sk.vdsj.timetable.builder.types.*;
+import sk.vdsj.timetable.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, AfterEvent, AfterOrganiser {
+public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, AfterEvent, AfterOrganiser, AfterOptional {
     private static Timetable timetable;
     private static Schedule scheduleContext;
     private static Event eventContext;
@@ -21,8 +15,8 @@ public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, Aft
     private static List<Event> events;
     private static List<String> organisers;
 
-    public static AfterTimetable timetable(String programme, String semester, String grade) {
-        timetable = new Timetable(programme, semester, grade, null);
+    public static AfterTimetable timetable(String programme, String semester, String startDate, String endDate, String grade) {
+        timetable = new Timetable(programme, semester, DateRange.valueOf(startDate + " - " + endDate), grade, null);
         return new MethodChainingBuilder();
     }
 
@@ -37,18 +31,9 @@ public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, Aft
     }
 
     @Override
-    public AfterEvent event(String type, String time, String location, String groups, String note) {
+    public AfterEvent event(String type, String time, String location) {
         addPreviousEvent();
-        eventContext = new Event(type, Time.valueOf(time), location, groups, null, note);
-        organisers = new ArrayList<>();
-
-        return this;
-    }
-
-    @Override
-    public AfterEvent event(String type, String time, String location, String groups) {
-        addPreviousEvent();
-        eventContext = new Event(type, Time.valueOf(time), location, groups, null, null);
+        eventContext = new Event(type, Time.valueOf(time), location, null, null, null, 1);
         organisers = new ArrayList<>();
 
         return this;
@@ -57,6 +42,24 @@ public class MethodChainingBuilder implements AfterTimetable, AfterSchedule, Aft
     @Override
     public AfterOrganiser organiser(String name) {
         organisers.add(name);
+        return this;
+    }
+
+    @Override
+    public AfterOptional groups(String name) {
+        eventContext.setGroups(name);
+        return this;
+    }
+
+    @Override
+    public AfterOptional note(String name) {
+        eventContext.setNote(name);
+        return this;
+    }
+
+    @Override
+    public AfterOptional interval(int interval) {
+        eventContext.setInterval(interval);
         return this;
     }
 

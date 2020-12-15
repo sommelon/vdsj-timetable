@@ -1,10 +1,7 @@
 package sk.vdsj.timetable.antlr4.grammar;
 
 import org.antlr.v4.runtime.ParserRuleContext;
-import sk.vdsj.timetable.model.Event;
-import sk.vdsj.timetable.model.Schedule;
-import sk.vdsj.timetable.model.Time;
-import sk.vdsj.timetable.model.Timetable;
+import sk.vdsj.timetable.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +16,7 @@ public class GrammarParserListener extends GrammarBaseListener {
 
     @Override
     public void enterTimetable(GrammarParser.TimetableContext ctx) {
-        timetable = new Timetable(null, null, null, null);
+        timetable = new Timetable(null, null, null, null, null);
         schedules = new ArrayList<>();
         super.enterTimetable(ctx);
     }
@@ -35,6 +32,12 @@ public class GrammarParserListener extends GrammarBaseListener {
         String halfYear = ctx.getChild(0).getText();
         timetable.setSemester(halfYear + " " + ctx.getText().substring(halfYear.length()));
         super.enterSemester(ctx);
+    }
+
+    @Override
+    public void enterPeriod(GrammarParser.PeriodContext ctx) {
+        timetable.setPeriod(DateRange.valueOf(ctx.getText()));
+        super.enterPeriod(ctx);
     }
 
     @Override
@@ -58,7 +61,7 @@ public class GrammarParserListener extends GrammarBaseListener {
 
     @Override
     public void enterEvent(GrammarParser.EventContext ctx) {
-        event = new Event(null, null, null, null, null, null);
+        event = new Event(null, null, null, null, null, null, 1);
         teachers = new ArrayList<>();
         super.enterEvent(ctx);
     }
@@ -76,6 +79,12 @@ public class GrammarParserListener extends GrammarBaseListener {
     }
 
     @Override
+    public void enterInterval(GrammarParser.IntervalContext ctx) {
+        event.setInterval(Integer.parseInt(ctx.getChild(0).getText()));
+        super.enterInterval(ctx);
+    }
+
+    @Override
     public void enterTime(GrammarParser.TimeContext ctx) {
         String day = ctx.getChild(0).getText();
         event.setTime(Time.valueOf(day + " " + ctx.getText().substring(day.length())));
@@ -90,7 +99,8 @@ public class GrammarParserListener extends GrammarBaseListener {
 
     @Override
     public void enterOrganiser(GrammarParser.OrganiserContext ctx) {
-        teachers.add(getSeparatedText(ctx));
+        String organiser = getSeparatedText(ctx).replace(" .", ".");
+        teachers.add(organiser);
         super.enterOrganiser(ctx);
     }
 

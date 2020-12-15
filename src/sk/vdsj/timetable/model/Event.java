@@ -7,14 +7,16 @@ public class Event {
     private String groups;
     private String[] organisers;
     private String note;
+    private int interval;
 
-    public Event(String type, Time time, String location, String groups, String[] organisers, String note) {
+    public Event(String type, Time time, String location, String groups, String[] organisers, String note, int interval) {
         this.type = type;
         this.time = time;
         this.location = location;
         this.groups = groups;
         this.organisers = organisers;
         this.note = note;
+        this.interval = interval;
     }
 
     // Getters and Setters
@@ -66,6 +68,14 @@ public class Event {
         this.note = note;
     }
 
+    public int getInterval() {
+        return interval;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
+    }
+
     public void validate() {
         if (time == null) {
             throw new TimetableLanguageException("Time of event isn't specified.");
@@ -75,6 +85,8 @@ public class Event {
             throw new TimetableLanguageException("Location of event at " + time + " isn't specified.");
         } else if (organisers == null || organisers.length < 1) {
             throw new TimetableLanguageException("At least one organiser is required for an event at " + time);
+        } else if (interval < 1) {
+            throw new TimetableLanguageException("Interval must be a positive integer.");
         }
 
         time.validate();

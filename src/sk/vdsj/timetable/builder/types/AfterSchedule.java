@@ -1,6 +1,5 @@
 package sk.vdsj.timetable.builder.types;
 
 public interface AfterSchedule {
-    AfterEvent event(String type, String time, String location, String groups, String note);
-    AfterEvent event(String type, String time, String location, String groups);
+    AfterEvent event(String type, String time, String location);
 }

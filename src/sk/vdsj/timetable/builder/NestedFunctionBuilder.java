@@ -1,9 +1,6 @@
 package sk.vdsj.timetable.builder;
 
-import sk.vdsj.timetable.model.Event;
-import sk.vdsj.timetable.model.Schedule;
-import sk.vdsj.timetable.model.Time;
-import sk.vdsj.timetable.model.Timetable;
+import sk.vdsj.timetable.model.*;
 
 public class NestedFunctionBuilder {
     private static Timetable timeTable;
@@ -12,8 +9,8 @@ public class NestedFunctionBuilder {
         return timeTable;
     }
 
-    public static void timetable(String programme, String semester, String grade, Schedule... schedules) {
-        timeTable = new Timetable(programme, semester, grade, schedules);
+    public static void timetable(String programme, String semester, String startDate, String endDate, String grade, Schedule... schedules) {
+        timeTable = new Timetable(programme, semester, DateRange.valueOf(startDate + " - " + endDate), grade, schedules);
     }
 
     public static Schedule schedule(String title, Event... events) {
@@ -29,19 +26,37 @@ public class NestedFunctionBuilder {
     }
 
     // All options for event
+    // With groups
+    public static Event event(String type, String time, String location, String groups, String[] organisers, String note, int interval) {
+        return new Event(type, Time.valueOf(time), location, groups, organisers, note, interval);
+    }
+
     public static Event event(String type, String time, String location, String groups, String[] organisers, String note) {
-        return new Event(type, Time.valueOf(time), location, groups, organisers, note);
+        return new Event(type, Time.valueOf(time), location, groups, organisers, note, 1);
+    }
+
+    public static Event event(String type, String time, String location, String groups, String[] organisers, int interval) {
+        return new Event(type, Time.valueOf(time), location, groups, organisers, null, interval);
     }
 
     public static Event event(String type, String time, String location, String groups, String... organisers) {
-        return new Event(type, Time.valueOf(time), location, groups, organisers, null);
+        return new Event(type, Time.valueOf(time), location, groups, organisers, null, 1);
+    }
+
+    // Without groups
+    public static Event event(String type, String time, String location, String... organisers) {
+        return new Event(type, Time.valueOf(time), location, null, organisers, null, 1);
+    }
+
+    public static Event event(String type, String time, String location, String[] organisers, String note, int interval) {
+        return new Event(type, Time.valueOf(time), location, null, organisers, note, interval);
     }
 
     public static Event event(String type, String time, String location, String[] organisers, String note) {
-        return new Event(type, Time.valueOf(time), location, null, organisers, note);
+        return new Event(type, Time.valueOf(time), location, null, organisers, note, 1);
     }
 
-    public static Event event(String type, String time, String location, String... organisers) {
-        return new Event(type, Time.valueOf(time), location, null, organisers, null);
+    public static Event event(String type, String time, String location, String[] organisers, int interval) {
+        return new Event(type, Time.valueOf(time), location, null, organisers, null, interval);
     }
 }

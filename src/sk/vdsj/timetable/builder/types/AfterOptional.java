@@ -1,6 +1,6 @@
 package sk.vdsj.timetable.builder.types;
 
-public interface AfterOrganiser extends AfterSchedule, AfterEvent, AfterTimetable {
+public interface AfterOptional extends AfterSchedule, AfterTimetable {
     AfterOptional groups(String groups);
     AfterOptional note(String note);
     AfterOptional interval(int interval);

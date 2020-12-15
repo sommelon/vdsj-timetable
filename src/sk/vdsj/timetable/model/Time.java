@@ -2,11 +2,14 @@ package sk.vdsj.timetable.model;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Time {
     private DayOfWeek day;
     private LocalTime startTime;
     private LocalTime endTime;
+
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
 
     public Time(DayOfWeek day, LocalTime startTime, LocalTime endTime){
         this.day = day;
@@ -51,15 +54,8 @@ public class Time {
             String startTimeString = time.substring(time.indexOf(' ') + 1, time.indexOf('-'));
             String endTimeString = time.substring(time.indexOf('-') + 1);
 
-            if (startTimeString.length() == 4) { // ("H:MM").length() = 4
-                startTimeString = "0" + startTimeString;
-            }
-            if (endTimeString.length() == 4) { // ("H:MM").length() = 4
-                endTimeString = "0" + endTimeString;
-            }
-
-            startTime = LocalTime.parse(startTimeString);
-            endTime = LocalTime.parse(endTimeString);
+            startTime = LocalTime.parse(startTimeString, formatter);
+            endTime = LocalTime.parse(endTimeString, formatter);
         } catch (Exception e) {
             throw new TimetableLanguageException("Invalid time format: " + time);
         }

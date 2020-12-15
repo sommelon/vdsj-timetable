@@ -12,14 +12,17 @@ public class MainNestedFunction {
 
         timetable("Informatika",
                   "LS 2020/2021",
-                  "BC1",
+                "12.09.2020",
+                "21.12.2020",
+                "BC1",
                    schedule("Vývoj doménovo-špecifických jazykov",
                             event("CL",
                                   "STR 10:50-12:20",
                                   "ZP1",
                                   "1, 2",
                                   organiser("Janko Hraško"),
-                                  "Prezenčne"
+                                  "Prezenčne",
+                                  2
                             ),
                             event("P",
                                   "STR 13:30-15:00",
@@ -27,7 +30,7 @@ public class MainNestedFunction {
                                   "1, 2",
                                   organisers("Janko Hraško",
                                           "Jožko Mrkvička"),
-                                  "Hybridne"
+                                  2
                             )
                    ),
                    schedule("Paralelné programovanie",
@@ -42,7 +45,8 @@ public class MainNestedFunction {
                                   "STV 13:30-15:00",
                                   "ZP1",
                                   organisers("Ivan Gašparovič",
-                                          "Ing. Andrej Danko, PhD")
+                                          "Ing. Andrej Danko, PhD"),
+                                  2
                             )
                 )
         )
