@@ -108,7 +108,7 @@ public class MainICalExport {
         endDate.set(java.util.Calendar.SECOND, event.getTime().getEndTime().getSecond());
 
         // Create the event
-        String eventName = event.getType() + (event.getGroups().equals("") ? " (" +event.getGroups()+ ") " : " ") + name;
+        String eventName = event.getType() + (event.getGroups().equals("") ? " " : " (" +event.getGroups()+ ") ") + name;
         DateTime start = new DateTime(startDate.getTime());
         DateTime end = new DateTime(endDate.getTime());
         VEvent meeting = new VEvent(start, end, eventName);
