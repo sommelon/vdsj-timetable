@@ -45,7 +45,11 @@ public class Event {
     }
 
     public String getGroups() {
-        return groups;
+        if(groups != null) {
+            return groups;
+        } else{
+            return "";
+        }
     }
 
     public void setGroups(String groups) {
@@ -61,6 +65,7 @@ public class Event {
     }
 
     public String getNote() {
+        if(note == null) return "";
         return note;
     }
 

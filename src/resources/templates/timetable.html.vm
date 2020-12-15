@@ -16,7 +16,7 @@
             }
 
             .interval{
-                display: none;
+                display: block;
             }
 
         </style>
@@ -25,6 +25,7 @@
     <body>
         <div class="container">
             <h2 class="text-center mt-4">$timetable.getFullTitle()</h2>
+            <h3 class="text-center">$timetable.getPeriod()</h3>
             <table class="table mt-4">
                 <tbody>
                 <tr style="background: darkgrey;">
