@@ -34,8 +34,8 @@ public class DateRange {
         LocalDate endDate;
         String[] dates = periodString.split("-");
         try {
-            startDate = LocalDate.parse(dates[0], formatter);
-            endDate = LocalDate.parse(dates[1], formatter);
+            startDate = LocalDate.parse(dates[0].trim(), formatter);
+            endDate = LocalDate.parse(dates[1].trim(), formatter);
         } catch (Exception e) {
             throw new TimetableLanguageException("Invalid date format: " + periodString);
         }
