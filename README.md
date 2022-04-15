@@ -22,13 +22,15 @@ Informatika LS 2020/2021 (21.10.2020 - 22.12.2020) - BC1:
 
 ### How to run
 Generate ANTLR4 files
-`antlr4 -o <PATHTOPROJECT>vdsj-timetable\src\sk\vdsj\timetable\antlr4\grammar -package sk.vdsj.timetable.antlr4.grammar -listener -visitor -lib <PATHTOPROJECT>vdsj-timetable/src/sk/vdsj/timetable/antlr4/grammar <PATHTOPROJECT>/vdsj-timetable/src/sk/vdsj/timetable/antlr4/grammar\Grammar.g4`
+```
+antlr4 -o <PATHTOPROJECT>vdsj-timetable\src\sk\vdsj\timetable\antlr4\grammar -package sk.vdsj.timetable.antlr4.grammar -listener -visitor -lib <PATHTOPROJECT>vdsj-timetable/src/sk/vdsj/timetable/antlr4/grammar <PATHTOPROJECT>/vdsj-timetable/src/sk/vdsj/timetable/antlr4/grammar\Grammar.g4
+```
 
 Run either of these files (Requires Java 15):
-`MainFunctionSequence.java` - Proof of concept using a function sequence pattern
-`MainMethodChainingBuilder.java` - Proof of concept using a method chaining pattern
-`MainNestedFunction.java` - Proof of concept using a nested function pattern
-`MainParserListener.java` - Implementation of the language using the Listener pattern
-`MainParserVisitor.java` - Implementation of the language using the Visitor pattern
-`MainICalExport.java` - Generate the timetable as an iCal file
-`MainWebGeneratorVelocity.java` - Generate frontend for the generated timetable
+- `MainFunctionSequence.java` - Proof of concept using a function sequence pattern
+- `MainMethodChainingBuilder.java` - Proof of concept using a method chaining pattern
+- `MainNestedFunction.java` - Proof of concept using a nested function pattern
+- `MainParserListener.java` - Implementation of the language using the Listener pattern
+- `MainParserVisitor.java` - Implementation of the language using the Visitor pattern
+- `MainICalExport.java` - Generate the timetable as an iCal file
+- `MainWebGeneratorVelocity.java` - Generate frontend for the generated timetable
